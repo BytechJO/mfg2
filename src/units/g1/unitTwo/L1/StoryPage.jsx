@@ -1,0 +1,1146 @@
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2, MessageSquareText } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import '../../shared/StoryPage.css';
+
+const video1 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800947/1_z09nin.mp4";
+const video2 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800952/2_iucugh.mp4";
+const video3 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800963/3_igmikv.mp4";
+const video4 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800966/4_q2b6qs.mp4";
+const video5 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800971/5_g2ajkd.mp4";
+
+const posters = [
+  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_z09nin.jpg",
+  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_iucugh.jpg",
+  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_igmikv.jpg",
+  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_q2b6qs.jpg",
+  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_g2ajkd.jpg",
+];
+
+
+export const StoryPage = () => {
+  const [showCaption, setShowCaption] = useState(true);
+  // 1
+  const [extraBubble, setExtraBubble] = useState(null);
+  // e
+  const [currentVideo, setCurrentVideo] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const videoRef = useRef(null);
+  const [selectedWords, setSelectedWords] = useState([]);
+  const { unitId, lessonId } = useParams();
+  const navigate = useNavigate();
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showBubble, setShowBubble] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
+  const [volume, setVolume] = useState(1);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [showSubtitles, setShowSubtitles] = useState(true);
+  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+
+  const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const fullscreenContainerRef = useRef(null);
+
+  const videos = [
+    {
+      url: video1,
+      title: "Section 1",
+      subtitles: [
+      ]
+    },
+
+    {
+      url: video2,
+      title: "Section 2",
+      subtitles: [
+
+      ]
+    },
+
+    {
+      url: video3,
+      title: "Section 3",
+      subtitles: [
+
+      ]
+    },
+
+
+    {
+      url: video4,
+      title: "Section 4",
+      subtitles: [
+
+        {
+          start: 5.0, end: 7.6,
+          words: [
+            { text: "Sofia", start: 5.8, end: 6.1 },
+            { text: "do", start: 6.1, end: 6.4 },
+            { text: "work", start: 6.4, end: 6.9 },
+            { text: "too.", start: 7.1, end: 7.5 },
+          ]
+        },
+
+        {
+          start: 23.0, end: 24.2,
+          words: [
+            { text: "That", start: 23.0, end: 23.3 },
+            { text: "feels", start: 23.3, end: 23.7 },
+            { text: "better,", start: 23.7, end: 24.0 },
+          ]
+        },
+
+
+      ]
+    },
+
+    {
+      url: video5,
+      title: "Section 5",
+      subtitles: [
+        {
+      start: 24.0, end: 30.0,
+      words: [
+        { text: "Beth", start: 24.1, end: 24.4 },
+        { text: "is", start: 24.4, end: 24.7 },
+        { text: "happy", start: 24.7, end: 25.0 },
+        { text: "that", start: 25.0, end: 25.3 },
+        { text: "she", start: 25.3, end: 25.6 },
+        { text: "controlled", start: 25.6, end: 25.9 },
+        { text: "her", start: 25.9, end: 26.2 },
+        { text: "anger.", start: 26.2, end: 26.5 },
+      ]
+    },
+      ]
+
+    },
+  ];
+
+
+  const cloudPositions = {
+
+    0: [
+    ],
+
+    1: [
+    ],
+
+    2: [
+
+    ],
+
+    3: [
+      { bottom: '80%', left: '28%', isFlipped: true },
+      { top: '10%', left: '20%' },
+    ],
+
+    4: [
+      { bottom: '70%', left: '28%', isFlipped: true },
+    ],
+  };
+
+  const extraBubblesData = [
+    {
+      videoIndex: 1,
+      start: 0,
+      end: 3.4,
+      words: [
+        { text: "Beth", start: 0.0, end: 0.5 },
+        { text: "worked", start: 0.5, end: 0.8 },
+        { text: "hard", start: 0.8, end: 1.2 },
+        { text: "on", start: 1.2, end: 1.7 },
+        { text: "her", start: 1.7, end: 2.1 },
+        { text: "maths", start: 2.1, end: 2.4 },
+        { text: "homework", start: 2.4, end: 2.8 },
+        { text: "today.", start: 2.8, end: 3.2 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 3.5,
+      end: 6.0,
+      words: [
+        { text: "It", start: 3.8, end: 4.0 },
+        { text: "took", start: 4.0, end: 4.3 },
+        { text: "her", start: 4.3, end: 4.5 },
+        { text: "a long", start: 4.5, end: 4.8 },
+        { text: "time", start: 4.8, end: 5.1 },
+        { text: "to", start: 5.1, end: 5.3 },
+        { text: "finish.", start: 5.3, end: 5.5 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 6.0,
+      end: 8.7,
+      words: [
+        { text: "She", start: 6.5, end: 6.8 },
+        { text: "is", start: 6.8, end: 7.1 },
+        { text: "proud", start: 7.1, end: 7.4 },
+        { text: "of", start: 7.4, end: 7.7 },
+        { text: "her", start: 7.7, end: 8.0 },
+        { text: "hard", start: 8.0, end: 8.3 },
+        { text: "work.", start: 8.3, end: 8.6 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 8.9,
+      end: 13.0,
+      words: [
+        { text: "She", start: 9.0, end: 9.3 },
+        { text: "leaves", start: 9.3, end: 9.7 },
+        { text: "it", start: 9.7, end: 9.9 },
+        { text: "on", start: 9.9, end: 10.2 },
+        { text: "the,", start: 10.2, end: 10.4 },
+        { text: "table", start: 10.4, end: 10.8 },
+        { text: "and", start: 11.5, end: 11.8 },
+        { text: "goes", start: 11.8, end: 12.1 },
+        { text: "outside", start: 12.1, end: 12.4 },
+        { text: "to play.", start: 12.4, end: 12.7 },
+      ]
+    },
+
+    {
+      videoIndex: 2,
+      start: 0, end: 1.0,
+      words: [
+        { text: "After", start: 0.1, end: 0.4 },
+        { text: "a", start: 0.4, end: 0.7 },
+        { text: "while,", start: 0.7, end: 1.0 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 1.3, end: 3.0,
+      words: [
+        { text: "she", start: 1.3, end: 1.6 },
+        { text: "comes", start: 1.6, end: 1.9 },
+        { text: "in", start: 1.9, end: 2.1 },
+        { text: "for", start: 2.1, end: 2.3 },
+        { text: "a drink.", start: 2.3, end: 2.5 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 3.3, end: 4.5,
+      words: [
+        { text: "Oh", start: 3.3, end: 3.8 },
+        { text: "no!", start: 3.8, end: 4.3 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 4.6, end: 8.0,
+      words: [
+        { text: "There", start: 5.0, end: 5.3 },
+        { text: "are", start: 5.3, end: 5.6 },
+        { text: "huge", start: 5.6, end: 5.9 },
+        { text: "black", start: 5.9, end: 6.2 },
+        { text: "marks", start: 6.2, end: 6.5 },
+        { text: "all", start: 6.5, end: 6.8 },
+        { text: "over", start: 6.8, end: 7.1 },
+        { text: "her", start: 7.1, end: 7.4 },
+        { text: "homework,", start: 7.4, end: 7.7 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 8.0, end: 13.0,
+      words: [
+        { text: "and", start: 8.5, end: 8.8 },
+        { text: "Beth", start: 8.8, end: 9.1 },
+        { text: "knows", start: 9.1, end: 9.4 },
+        { text: "exactly", start: 9.4, end: 9.7 },
+        { text: "who", start: 9.7, end: 10.0 },
+        { text: "did", start: 10.0, end: 10.3 },
+        { text: "it!", start: 10.3, end: 10.6 },
+        { text: "Beth", start: 12.0, end: 12.3 },
+        { text: "feels,", start: 12.3, end: 12.6 },
+        { text: "angry.", start: 12.6, end: 12.9 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 13.1, end: 16.5,
+      words: [
+        { text: "She", start: 13.5, end: 13.8 },
+        { text: "will", start: 13.8, end: 14.1 },
+        { text: "have", start: 14.1, end: 14.4 },
+        { text: "to do", start: 14.4, end: 14.7 },
+        { text: "all", start: 14.7, end: 15.0 },
+        { text: "her", start: 15.0, end: 15.3 },
+        { text: "hard", start: 15.3, end: 15.6 },
+        { text: "work", start: 15.6, end: 15.9 },
+        { text: "again.", start: 15.9, end: 16.4 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 16.6, end: 20.1,
+      words: [
+        { text: "Her", start: 16.8, end: 17.1 },
+        { text: "face", start: 17.1, end: 17.4 },
+        { text: "grows", start: 17.4, end: 17.7 },
+        { text: "red,", start: 17.7, end: 18.0 },
+        { text: "and", start: 18.5, end: 18.8 },
+        { text: "she", start: 18.8, end: 19.1 },
+        { text: "feels", start: 19.1, end: 19.4 },
+        { text: "like", start: 19.4, end: 19.7 },
+        { text: "crying.", start: 19.7, end: 20.0 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 20.4, end: 24,
+      words: [
+        { text: "She", start: 20.5, end: 20.8 },
+        { text: "knows", start: 20.8, end: 21.1 },
+        { text: "her", start: 21.1, end: 21.4 },
+        { text: "four-", start: 21.4, end: 21.7 },
+        { text: "year", start: 21.7, end: 22.0 },
+        { text: "-old", start: 22.0, end: 22.3 },
+        { text: "sister", start: 22.3, end: 22.6 },
+        { text: "drew", start: 22.6, end: 22.9 },
+        { text: "on her", start: 22.9, end: 23.1 },
+        { text: "work.", start: 23.1, end: 23.7 },
+      ]
+    },
+
+
+    {
+      videoIndex: 3,
+      start: 0, end: 3.0,
+      words: [
+        { text: "Sofia,", start: 0, end: 0.8 },
+        { text: "Beth’s", start: 0.8, end: 1.2 },
+        { text: "sister", start: 1.2, end: 1.5 },
+        { text: "walks", start: 1.5, end: 1.8 },
+        { text: "into", start: 1.8, end: 2.1 },
+        { text: "the", start: 2.1, end: 2.4 },
+        { text: "room.", start: 2.4, end: 2.8 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 3.0, end: 5.0,
+      words: [
+        { text: "Sofia", start: 3.1, end: 3.5 },
+        { text: "is", start: 3.5, end: 3.7 },
+        { text: "holding", start: 3.7, end: 4.0 },
+        { text: "a black", start: 4.0, end: 4.3 },
+        { text: "crayon.", start: 4.3, end: 4.9 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 7.7, end: 10.9,
+      words: [
+        { text: "Beth", start: 7.7, end: 8.0 },
+        { text: "knows", start: 8.0, end: 8.4 },
+        { text: "that", start: 8.4, end: 8.6 },
+        { text: "she", start: 8.6, end: 8.9 },
+        { text: "needs", start: 8.9, end: 9.2 },
+        { text: "to", start: 9.2, end: 9.5 },
+        { text: "calm", start: 9.5, end: 9.8 },
+        { text: "down", start: 9.8, end: 10.1 },
+        { text: "before", start: 10.1, end: 10.4 },
+        { text: "speaking,", start: 10.4, end: 10.7 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 12.0, end: 14.5,
+      words: [
+        { text: "so", start: 12.0, end: 12.3 },
+        { text: "she", start: 12.3, end: 12.6 },
+        { text: "walks", start: 12.6, end: 12.9 },
+        { text: "up", start: 12.9, end: 13.2 },
+        { text: "to", start: 13.2, end: 13.5 },
+        { text: "her", start: 13.5, end: 13.8 },
+        { text: "bedroom.", start: 13.8, end: 14.1 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 14.6, end: 22.0,
+      words: [
+        { text: "She", start: 15.2, end: 15.7 },
+        { text: "closes", start: 15.7, end: 16.1 },
+        { text: "her", start: 16.1, end: 16.4 },
+        { text: "eyes", start: 16.4, end: 16.9 },
+        { text: "and", start: 17.5, end: 17.8 },
+        { text: "takes", start: 17.8, end: 18.1 },
+        { text: "some", start: 18.1, end: 18.4 },
+        { text: "deep", start: 18.4, end: 18.7 },
+        { text: "breaths", start: 18.7, end: 19.0 },
+        { text: "and", start: 19.5, end: 19.8 },
+        { text: "counts", start: 19.8, end: 20.1 },
+        { text: "to", start: 20.1, end: 20.4 },
+        { text: "ten", start: 20.4, end: 20.7 },
+        { text: "to", start: 20.7, end: 21.0 },
+        { text: "calm", start: 21.0, end: 21.3 },
+        { text: "down.", start: 21.3, end: 21.6 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 24.3, end: 28.5,
+      words: [
+        { text: "She", start: 24.4, end: 24.7 },
+        { text: "wants", start: 24.7, end: 25.0 },
+        { text: "to", start: 25.0, end: 25.3 },
+        { text: "speak", start: 25.3, end: 25.6 },
+        { text: "to", start: 25.6, end: 25.9 },
+        { text: "her", start: 25.9, end: 26.2 },
+        { text: "sister", start: 26.2, end: 26.5 },
+        { text: "now", start: 26.5, end: 26.8 },
+        { text: "that", start: 26.8, end: 27.1 },
+        { text: "she", start: 27.1, end: 27.4 },
+        { text: "is", start: 27.4, end: 27.7 },
+        { text: "calm.", start: 27.7, end: 28.0 },
+      ]
+    },
+
+    {
+      videoIndex: 4,
+      start: 0, end: 5,
+      words: [
+        { text: "Beth", start: 0.1, end: 0.4 },
+        { text: "knows", start: 0.4, end: 0.7 },
+        { text: "that,", start: 0.7, end: 1.0 },
+        { text: "Sofia", start: 1.0, end: 1.3 },
+        { text: "just", start: 1.3, end: 1.6 },
+        { text: "wanted", start: 1.6, end: 1.9 },
+        { text: "to", start: 1.9, end: 2.2 },
+        { text: "make", start: 2.2, end: 2.5 },
+        { text: "marks", start: 2.5, end: 2.8 },
+        { text: "on", start: 2.8, end: 3.1 },
+        { text: "paper,", start: 3.1, end: 3.4 },
+        { text: "like", start: 3.4, end: 3.7 },
+        { text: "her", start: 3.7, end: 4.0 },
+        { text: "big", start: 4.0, end: 4.3 },
+        { text: "sister.", start: 4.3, end: 4.6 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 6.3, end: 10.0,
+      words: [
+        { text: "Beth", start: 6.3, end: 6.6 },
+        { text: "walks", start: 6.6, end: 6.9 },
+        { text: "down", start: 6.9, end: 7.2 },
+        { text: "stairs", start: 7.2, end: 7.5 },
+        { text: "and", start: 7.5, end: 7.8 },
+        { text: "tells", start: 7.8, end: 8.1 },
+        { text: "her", start: 8.1, end: 8.4 },
+        { text: "mum", start: 8.4, end: 8.7 },
+        { text: "about", start: 8.7, end: 9.0 },
+        { text: "her", start: 9.0, end: 9.3 },
+        { text: "homework.", start: 9.3, end: 10.0 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 10.3, end: 14.0,
+      words: [
+        { text: "Mum", start: 10.8, end: 11.1 },
+        { text: "is", start: 11.1, end: 11.4 },
+        { text: "very", start: 11.4, end: 11.7 },
+        { text: "proud", start: 11.7, end: 12.0 },
+        { text: "that", start: 12.0, end: 12.3 },
+        { text: "Beth", start: 12.3, end: 12.6 },
+        { text: "is", start: 12.6, end: 12.9 },
+        { text: "controlling", start: 12.9, end: 13.2 },
+        { text: "her", start: 13.2, end: 13.5 },
+        { text: "anger.", start: 13.5, end: 13.8 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 15.3, end: 19.5,
+      words: [
+        { text: "Mum", start: 15.5, end: 15.8 },
+        { text: "tells", start: 15.8, end: 16.1 },
+        { text: "Sofia", start: 16.1, end: 16.4 },
+        { text: "to", start: 16.4, end: 16.7 },
+        { text: "always", start: 16.7, end: 17.0 },
+        { text: "ask", start: 17.0, end: 17.3 },
+        { text: "before", start: 17.3, end: 17.6 },
+        { text: "she", start: 17.6, end: 17.9 },
+        { text: "colours.", start: 17.9, end: 18.5 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 19.0, end: 22.9,
+      words: [
+        { text: "Mum", start: 19.1, end: 19.4 },
+        { text: "finds", start: 19.4, end: 19.7 },
+        { text: "Beth", start: 19.7, end: 20.0 },
+        { text: "a", start: 20.0, end: 20.3 },
+        { text: "folder", start: 20.3, end: 20.6 },
+        { text: "where", start: 20.6, end: 20.9 },
+        { text: "she", start: 20.9, end: 21.2 },
+        { text: "can", start: 21.2, end: 21.5 },
+        { text: "keep", start: 21.5, end: 21.8 },
+        { text: "her", start: 21.8, end: 22.1 },
+        { text: "homework", start: 22.1, end: 22.4 },
+        { text: "safe.", start: 22.4, end: 22.7 },
+      ]
+    },
+    
+  ];
+
+
+ const [showWrongFeedback, setShowWrongFeedback] = useState(false);
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  const [autoPlayNext, setAutoPlayNext] = useState(true);
+  const [textHighlight, setTextHighlight] = useState(true);
+  const settingsPopupRef = useRef(null);
+  const [narrationHighlight, setNarrationHighlight] = useState(true);
+  const currentVideoData = videos[currentVideo];
+
+
+  useEffect(() => {
+    if (showSettingsPopup && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showSettingsPopup]);
+
+  const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
+    sub => currentTime >= sub.start && currentTime < sub.end
+  );
+  const activeSubtitle = activeSubtitleIndex !== -1
+    ? currentVideoData.subtitles[activeSubtitleIndex]
+    : null;
+  const bubbleStyle = cloudPositions[currentVideo] && cloudPositions[currentVideo][activeSubtitleIndex]
+    ? cloudPositions[currentVideo][activeSubtitleIndex]
+    : {};
+
+  const handleMouseDown = () => {
+    setIsSelecting(true);
+  };
+  const handleMouseUp = () => {
+    if (isSelecting) {
+      handleTextSelection();
+    }
+    setIsSelecting(false);
+  };
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(bubble =>
+      bubble.videoIndex === currentVideo &&
+      currentTime >= bubble.start &&
+      currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+
+  }, [currentVideo, currentTime]);
+  useEffect(() => {
+    const nextVideoIndex = currentVideo + 1;
+    if (nextVideoIndex < videos.length) {
+      const nextVideoUrl = videos[nextVideoIndex].url;
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = nextVideoUrl;
+      document.head.appendChild(link);
+      return () => {
+        document.head.removeChild(link);
+      };
+    }
+  }, [currentVideo, videos]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (currentVideo === 4 && isPlaying) {
+      console.log(`Current Time: ${currentTime}, Duration: ${duration}`);
+      if (duration > 0 && currentTime >= duration - 0.1) {
+        video.pause();
+        setShowBanner(true);
+      }
+    }
+  }, [currentTime, currentVideo, isPlaying, duration]);
+
+  const handleTryAgain = () => {
+    setSelectedWords([]);
+    setShowFeedback(false);
+  };
+  useEffect(() => {
+    setSelectedWords([]);
+    setShowFeedback(false);
+  }, [currentVideo]);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => setCurrentTime(video.currentTime);
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleLoadedData = () => setDuration(video.duration);
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+    video.addEventListener('loadeddata', handleLoadedData);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      video.removeEventListener('loadeddata', handleLoadedData);
+    };
+  }, []);
+  useEffect(() => {
+    if (showBanner && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showBanner]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      setCurrentTime(0);
+      setShowBubble(true);
+
+      // حاول تشغيل الفيديو الجديد تلقائيًا
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // لا بأس، المتصفح منع التشغيل التلقائي
+        });
+      }
+    }
+  }, [currentVideo]);
+  useEffect(() => {
+    if (showBanner && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showBanner]);
+
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = playbackSpeed;
+    }
+  }, [currentVideo, isPlaying, playbackSpeed]);
+  const handlePrevious = () => {
+    setCurrentVideo(prev => (prev > 0 ? prev - 1 : videos.length - 1));
+    setShowBanner(false);
+  };
+  const handleNext = () => {
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+      setShowBanner(false);
+    }
+  };
+  const togglePlay = () => {
+    if (selectedWords.length === 4) {
+      handleNext();
+      return;
+    }
+
+    if (!videoRef.current) return;
+
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+
+    setIsPlaying(!isPlaying);
+  };
+  const toggleMute = () => {
+    setIsMuted(prev => !prev);
+  };
+  const selectPlaybackSpeed = (speed) => {
+    setPlaybackSpeed(speed);
+    if (videoRef.current) {
+      videoRef.current.playbackRate = speed;
+    }
+    setShowSpeedMenu(false);
+  };
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (videoRef.current) {
+      videoRef.current.volume = newVolume;
+    }
+    setIsMuted(newVolume === 0);
+  };
+  const toggleFullscreen = () => {
+    const container = fullscreenContainerRef.current;
+    if (!container) return;
+
+    if (!document.fullscreenElement) {
+      container.requestFullscreen().catch(err => {
+        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        settingsPopupRef.current &&
+        !settingsPopupRef.current.contains(event.target)
+      ) {
+        setShowSettingsPopup(false);
+
+      }
+    };
+
+    if (showSettingsPopup) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () =>
+      document.removeEventListener('mousedown', handleClickOutside);
+  }, [showSettingsPopup]);
+
+
+  const handleEnded = useCallback(() => {
+    if (currentVideo === 4) {
+      setShowBanner(true);
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = videoRef.current.duration;
+      }
+    }
+    else if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    }
+    else {
+      setShowBanner(false);
+      if (autoPlayNext) {
+        setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : prev));
+      } else {
+        if (videoRef.current) {
+          videoRef.current.pause();
+        }
+      }
+    }
+  }, [currentVideo, videos.length, navigate, unitId, lessonId, autoPlayNext]);
+
+
+  const handleTextSelection = () => {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+
+    const selectedText = selection.toString().trim();
+    if (!selectedText) return;
+
+
+    const allCorrectWords = ["she", "controlled", "her", "anger"];
+
+    const wordsInSelection = selectedText
+      .split(/\s+/)
+      .map(word => word.replace(/[.,?!]/g, '').toLowerCase());
+
+    const hasWrongWords = wordsInSelection.some(word =>
+      word && !allCorrectWords.includes(word)
+    );
+
+    if (hasWrongWords) {
+      setShowWrongFeedback(true);
+      setTimeout(() => setShowWrongFeedback(false), 2000);
+      selection.removeAllRanges();
+      return;
+    }
+
+    const correctWordsInSelection = wordsInSelection.filter(word =>
+      allCorrectWords.includes(word)
+    );
+
+    if (correctWordsInSelection.length > 0) {
+      setSelectedWords(prev => {
+        const newWords = [...new Set([...prev, ...correctWordsInSelection])];
+        const allCorrectSelected = allCorrectWords.every(correctWord =>
+          newWords.some(w => w.toLowerCase() === correctWord)
+        );
+
+        if (allCorrectSelected && newWords.length === allCorrectWords.length) {
+          setShowFeedback(true);
+          setShowBanner(false);
+          setTimeout(() => {
+            setShowFeedback(false);
+            handleNext();
+            setShowBanner(false);
+          }, 2000);
+        }
+
+        return newWords;
+      });
+    }
+
+    selection.removeAllRanges();
+  };
+  const handleWordClick = (word) => {
+    const cleanWord = word.toLowerCase().replace(/[.,?!]/g, "");
+    const allCorrectWords = [
+      "she", "controlled", "her", "anger"
+    ];
+    if (!allCorrectWords.includes(cleanWord)) {
+      setShowWrongFeedback(true);
+      setTimeout(() => setShowWrongFeedback(false), 2000);
+      return;
+    }
+
+    setSelectedWords(prev => {
+      const newWords = [...new Set([...prev, cleanWord])];
+
+      const allCorrectSelected = allCorrectWords.every(correctWord =>
+        newWords.includes(correctWord)
+      );
+
+      if (allCorrectSelected) {
+        setShowFeedback(true);
+        setShowBanner(false);
+        setTimeout(() => {
+          setShowFeedback(false);
+          handleNext();
+          setShowBanner(false);
+        }, 2000);
+      }
+
+      return newWords;
+    });
+  };
+
+  return (
+    <div className="story-page-container">
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
+      <div className="w-full max-w-6xl">
+        <div ref={fullscreenContainerRef} className="video-wrapper">
+
+          <video
+            ref={videoRef}
+            className={`
+    w-full
+    h-full
+    object-cover
+
+    ${isFullscreen ? 'fixed inset-0' : 'aspect-video'}
+  `}
+            muted={isMuted}
+            onEnded={handleEnded}
+            preload="auto"
+            src={currentVideoData.url}
+          >
+            Your browser does not support the video tag.
+          </video>
+
+          {showWrongFeedback && currentVideo === 4 && showBanner &&(
+            <div className="wrong-feedback">
+              Try Again! ❌
+            </div>
+          )}
+
+          {showFeedback && (
+            <div className="feedback-popup">
+              Good Job! 👍
+            </div>
+          )}
+
+          {currentVideo === 4 && showBanner && (
+            <div className="instruction-banner show">
+              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
+                Highlight the phrase that teaches the
+              </p>
+              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
+                main lesson from Beth’s story.
+              </p>
+            </div>
+          )}
+
+          {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
+            <div className="subtitle-container" style={bubbleStyle}>
+
+              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
+      `}>
+                <p
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
+                  style={{ userSelect: 'text', cursor: 'text' }}
+                >
+                  {activeSubtitle.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    const cleanWord = word.text.replace(/[.,?!]/g, '');
+                    const isSelected = selectedWords.some(w =>
+                      w.toLowerCase() === cleanWord.toLowerCase()
+                    );
+
+                    return (
+                      <span
+                        key={index}
+                        onClick={() => handleWordClick(word.text)}
+                        className={`word-span 
+              ${isHighlighted && textHighlight ? 'active-word' : ''} 
+              ${isSelected ? 'selected-word' : ''}`}
+                      >
+                        {word.text}{' '}
+                      </span>
+                    );
+                  })}
+                </p>
+
+              </div>
+            </div>
+          )}
+
+          {showCaption && extraBubble && extraBubble.words && (
+            <div
+              className="subtitle-container"
+              style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
+            >
+              <div className="extra-cloud animate__animated animate__fadeIn">
+                <p>
+                  {extraBubble.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    return (
+                      <span
+                        key={index}
+                        className={`word-span ${isHighlighted && narrationHighlight ? 'active-word' : ''}`}
+                      >
+                        {word.text}{' '}
+                      </span>
+                    );
+                  })}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="video-overlay" />
+          <div className="controls-container">
+
+            <div className="controlbbtn">
+              <button onClick={handlePrevious} className="control-btn left-nav-btn">
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+
+              <button onClick={handleNext} className="control-btn right-nav-btn">
+                <ChevronRight className="w-8 h-8" />
+              </button>
+            </div>
+
+            <div className="controls-wrapper-new">
+              <div className="controls-row">
+                <div className="controls-group-left">
+
+                  <div className="settings-container">
+                    <button
+                      onClick={() => setShowSettingsPopup(prev => !prev)}
+                      className="control-btn settings-btn"
+                      title="Settings"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="control-label">Settings</span>
+                    </button>
+
+                    {showSettingsPopup && (
+                      <>
+                        {/* 1. الخلفية الضبابية (Overlay) */}
+                        <div className="settings-overlay" onClick={() => setShowSettingsPopup(false)}></div>
+
+                        {/* 2. حاوية النافذة لتوسيطها */}
+                        <div className="settings-popup-container">
+                          <div ref={settingsPopupRef} className="settings-popup">
+                            <button
+                              onClick={() => setShowSettingsPopup(false)}
+                              className="close-popup-btn"
+                            >
+                              ×
+                            </button>
+
+                            <h3>Settings</h3>
+
+                            <div className="settings-options-grid">
+                              <div className="setting-item">
+                                <span className="setting-label">Conversation Caption</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={showSubtitles}
+                                    onChange={() => setShowSubtitles(!showSubtitles)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Text Highlight</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={textHighlight}
+                                    onChange={() => setTextHighlight(!textHighlight)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Narration</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={showCaption}
+                                    onChange={() => setShowCaption(!showCaption)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Narration Highlight</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={narrationHighlight}
+                                    onChange={() => setNarrationHighlight(!narrationHighlight)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Auto Page Turn</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={autoPlayNext}
+                                    onChange={() => setAutoPlayNext(!autoPlayNext)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  <div
+                    className="volume-control"
+                    onMouseEnter={() => setShowVolumeSlider(true)}
+                    onMouseLeave={() => setShowVolumeSlider(false)}
+                  >
+                    <button onClick={toggleMute} className="control-btn">
+                      {isMuted || volume === 0 ? (
+                        <VolumeX className="w-6 h-6" />
+                      ) : (
+                        <Volume2 className="w-6 h-6" />
+                      )}
+                    </button>
+                    {showVolumeSlider && (
+                      <div className="volume-slider-container">
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.1"
+                          value={volume}
+                          onChange={handleVolumeChange}
+                          className="volume-slider"
+                          orient="vertical"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="speed-control-container">
+                    <button
+                      onClick={() => setShowSpeedMenu(prev => !prev)}
+                      className="control-btn speed-btn"
+                      title="Playback Speed"
+                    >
+                      <span className="speed-label">{playbackSpeed}x</span>
+                    </button>
+
+                    {showSpeedMenu && (
+                      <ul className="speed-dropdown-list">
+                        {availableSpeeds.map((speed) => (
+                          <li
+                            key={speed}
+                            onClick={() => selectPlaybackSpeed(speed)}
+                            className={playbackSpeed === speed ? 'active-speed' : ''}
+                          >
+                            {speed}x
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+
+                <div className="controls-group-center">
+                  <button onClick={togglePlay} className="control-btn play-btn">
+                    {isPlaying ? (
+                      <Pause className="w-12 h-12" fill="white" />
+                    ) : (
+                      <Play className="w-12 h-12" fill="white" />
+                    )}
+                  </button>
+                </div>
+
+                <div className="controls-group-right">
+                  <button onClick={toggleFullscreen} className="control-btn">
+                    {isFullscreen ? (
+                      <Minimize2 className="w-6 h-6" />
+                    ) : (
+                      <Maximize2 className="w-6 h-6" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="progress-indicator-container">
+            {videos.map((_, index) => (
+              <div
+                key={index}
+                className={`progress-dot ${index === currentVideo ? 'active' : ''}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default StoryPage;
