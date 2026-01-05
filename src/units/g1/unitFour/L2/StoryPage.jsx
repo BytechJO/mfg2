@@ -624,7 +624,7 @@ export const StoryPage = () => {
     if (!selectedText) return;
 
 
-    const allCorrectWords = ["they","feel", "happy","when","care", "for", "their", "friends"];
+    const allCorrectWords = ["they", "feel", "happy", "when", "care", "for", "their", "friends"];
 
     const wordsInSelection = selectedText
       .split(/\s+/)
@@ -671,7 +671,7 @@ export const StoryPage = () => {
   const handleWordClick = (word) => {
     const cleanWord = word.toLowerCase().replace(/[.,?!]/g, "");
     const allCorrectWords = [
-      "they","feel", "happy","when","care", "for", "their", "friends"
+      "they", "feel", "happy", "when", "care", "for", "their", "friends"
     ];
     if (!allCorrectWords.includes(cleanWord)) {
       setShowWrongFeedback(true);
@@ -753,8 +753,13 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-         `}>
+              <div
+                className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 ? "question-bubble" : ""}
+    ${cloudPositions[currentVideo]?.isFlipped ? "flipped" : ""}
+  `}
+              >
+
                 <p
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}

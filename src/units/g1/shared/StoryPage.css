@@ -1745,3 +1745,16 @@ input:checked + .toggle-slider:before {
     margin-top: -40%;
   }
 }
+
+
+/* غيمة السؤال بدون زخرفة */
+.question-bubble::before,
+.question-bubble::after {
+  display: none !important;
+}
+
+/* لو عندك عناصر داخلية للدوائر */
+.question-bubble .bubble-dot,
+.question-bubble .bubble-circle {
+  display: none !important;
+}

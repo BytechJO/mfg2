@@ -3,11 +3,11 @@ import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Ma
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 
-const video1 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800947/1_z09nin.mp4";
-const video2 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800952/2_iucugh.mp4";
-const video3 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800963/3_igmikv.mp4";
-const video4 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800966/4_q2b6qs.mp4";
-const video5 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800971/5_g2ajkd.mp4";
+const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800947/1_z09nin.mp4";
+const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800952/2_iucugh.mp4";
+const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800963/3_igmikv.mp4";
+const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800966/4_q2b6qs.mp4";
+const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800971/5_g2ajkd.mp4";
 
 const posters = [
   "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_z09nin.jpg",
@@ -104,18 +104,18 @@ export const StoryPage = () => {
       title: "Section 5",
       subtitles: [
         {
-      start: 24.0, end: 30.0,
-      words: [
-        { text: "Beth", start: 24.1, end: 24.4 },
-        { text: "is", start: 24.4, end: 24.7 },
-        { text: "happy", start: 24.7, end: 25.0 },
-        { text: "that", start: 25.0, end: 25.3 },
-        { text: "she", start: 25.3, end: 25.6 },
-        { text: "controlled", start: 25.6, end: 25.9 },
-        { text: "her", start: 25.9, end: 26.2 },
-        { text: "anger.", start: 26.2, end: 26.5 },
-      ]
-    },
+          start: 24.0, end: 30.0,
+          words: [
+            { text: "Beth", start: 24.1, end: 24.4 },
+            { text: "is", start: 24.4, end: 24.7 },
+            { text: "happy", start: 24.7, end: 25.0 },
+            { text: "that", start: 25.0, end: 25.3 },
+            { text: "she", start: 25.3, end: 25.6 },
+            { text: "controlled", start: 25.6, end: 25.9 },
+            { text: "her", start: 25.9, end: 26.2 },
+            { text: "anger.", start: 26.2, end: 26.5 },
+          ]
+        },
       ]
 
     },
@@ -494,11 +494,11 @@ export const StoryPage = () => {
         { text: "safe.", start: 22.4, end: 22.7 },
       ]
     },
-    
+
   ];
 
 
- const [showWrongFeedback, setShowWrongFeedback] = useState(false);
+  const [showWrongFeedback, setShowWrongFeedback] = useState(false);
   const [isSelecting, setIsSelecting] = useState(false);
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [autoPlayNext, setAutoPlayNext] = useState(true);
@@ -856,7 +856,7 @@ export const StoryPage = () => {
             Your browser does not support the video tag.
           </video>
 
-          {showWrongFeedback && currentVideo === 4 && showBanner &&(
+          {showWrongFeedback && currentVideo === 4 && showBanner && (
             <div className="wrong-feedback">
               Try Again! ❌
             </div>
@@ -882,8 +882,13 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-      `}>
+              <div
+                className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 ? "question-bubble" : ""}
+    ${cloudPositions[currentVideo]?.isFlipped ? "flipped" : ""}
+  `}
+              >
+
                 <p
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}

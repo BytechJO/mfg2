@@ -14,11 +14,11 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import "../../shared/StoryPage.css";
 
-const video1 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801015/1_rzkzmr.mp4";
-const video2 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801022/2_wapg1m.mp4";
-const video3 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801027/3_bu54do.mp4";
-const video4 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801027/4_uhuwy7.mp4";
-const video5 ="https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801037/5_zsnkqu.mp4";
+const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801015/1_rzkzmr.mp4";
+const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801022/2_wapg1m.mp4";
+const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801027/3_bu54do.mp4";
+const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801027/4_uhuwy7.mp4";
+const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765801037/5_zsnkqu.mp4";
 
 const posters = [
   "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_rzkzmr.jpg",
@@ -152,21 +152,21 @@ export const StoryPage = () => {
       title: "Section 5",
       subtitles: [
         {
-      start: 6.0,
-      end: 12,
-      words: [
-        { text: "Emma", start: 6.5, end: 6.7 },
-        { text: "is", start: 6.7, end: 6.9 },
-        { text: "happy", start: 6.9, end: 7.2 },
-        { text: "that", start: 7.2, end: 7.5 },
-        { text: "she", start: 7.5, end: 7.8 },
-        { text: "helped", start: 7.8, end: 8.1 },
-        { text: "her", start: 8.1, end: 8.4 },
-        { text: "parents", start: 8.4, end: 8.7 },
-        { text: "at", start: 8.7, end: 9.0 },
-        { text: "home.", start: 9.0, end: 9.3 },
-      ],
-    },
+          start: 6.0,
+          end: 12,
+          words: [
+            { text: "Emma", start: 6.5, end: 6.7 },
+            { text: "is", start: 6.7, end: 6.9 },
+            { text: "happy", start: 6.9, end: 7.2 },
+            { text: "that", start: 7.2, end: 7.5 },
+            { text: "she", start: 7.5, end: 7.8 },
+            { text: "helped", start: 7.8, end: 8.1 },
+            { text: "her", start: 8.1, end: 8.4 },
+            { text: "parents", start: 8.4, end: 8.7 },
+            { text: "at", start: 8.7, end: 9.0 },
+            { text: "home.", start: 9.0, end: 9.3 },
+          ],
+        },
       ],
     },
 
@@ -281,7 +281,7 @@ export const StoryPage = () => {
         { text: "now.", start: 4.7, end: 5.2 },
       ],
     },
-    
+
     {
       videoIndex: 3,
       start: 3.0,
@@ -300,162 +300,162 @@ export const StoryPage = () => {
   ];
 
   const [showWrongFeedback, setShowWrongFeedback] = useState(false);
-    const [isSelecting, setIsSelecting] = useState(false);
-    const [showSettingsPopup, setShowSettingsPopup] = useState(false);
-    const [autoPlayNext, setAutoPlayNext] = useState(true);
-    const [textHighlight, setTextHighlight] = useState(true);
-    const settingsPopupRef = useRef(null);
-    const [narrationHighlight, setNarrationHighlight] = useState(true);
-    const currentVideoData = videos[currentVideo];
-  
-  
-    useEffect(() => {
-      if (showSettingsPopup && videoRef.current) {
-        videoRef.current.pause();
-      }
-    }, [showSettingsPopup]);
-  
-    const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
-      sub => currentTime >= sub.start && currentTime < sub.end
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  const [autoPlayNext, setAutoPlayNext] = useState(true);
+  const [textHighlight, setTextHighlight] = useState(true);
+  const settingsPopupRef = useRef(null);
+  const [narrationHighlight, setNarrationHighlight] = useState(true);
+  const currentVideoData = videos[currentVideo];
+
+
+  useEffect(() => {
+    if (showSettingsPopup && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showSettingsPopup]);
+
+  const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
+    sub => currentTime >= sub.start && currentTime < sub.end
+  );
+  const activeSubtitle = activeSubtitleIndex !== -1
+    ? currentVideoData.subtitles[activeSubtitleIndex]
+    : null;
+  const bubbleStyle = cloudPositions[currentVideo] && cloudPositions[currentVideo][activeSubtitleIndex]
+    ? cloudPositions[currentVideo][activeSubtitleIndex]
+    : {};
+
+  const handleMouseDown = () => {
+    setIsSelecting(true);
+  };
+  const handleMouseUp = () => {
+    if (isSelecting) {
+      handleTextSelection();
+    }
+    setIsSelecting(false);
+  };
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(bubble =>
+      bubble.videoIndex === currentVideo &&
+      currentTime >= bubble.start &&
+      currentTime < bubble.end
     );
-    const activeSubtitle = activeSubtitleIndex !== -1
-      ? currentVideoData.subtitles[activeSubtitleIndex]
-      : null;
-    const bubbleStyle = cloudPositions[currentVideo] && cloudPositions[currentVideo][activeSubtitleIndex]
-      ? cloudPositions[currentVideo][activeSubtitleIndex]
-      : {};
-  
-    const handleMouseDown = () => {
-      setIsSelecting(true);
-    };
-    const handleMouseUp = () => {
-      if (isSelecting) {
-        handleTextSelection();
-      }
-      setIsSelecting(false);
-    };
-    useEffect(() => {
-      const bubbleToShow = extraBubblesData.find(bubble =>
-        bubble.videoIndex === currentVideo &&
-        currentTime >= bubble.start &&
-        currentTime < bubble.end
-      );
-  
-      setExtraBubble(bubbleToShow || null);
-  
-    }, [currentVideo, currentTime]);
-    useEffect(() => {
-      const nextVideoIndex = currentVideo + 1;
-      if (nextVideoIndex < videos.length) {
-        const nextVideoUrl = videos[nextVideoIndex].url;
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'video';
-        link.href = nextVideoUrl;
-        document.head.appendChild(link);
-        return () => {
-          document.head.removeChild(link);
-        };
-      }
-    }, [currentVideo, videos]);
-    const [isLoading, setIsLoading] = useState(false);
-    useEffect(() => {
-      const video = videoRef.current;
-      if (!video) return;
-  
-      if (currentVideo === 4 && isPlaying) {
-        console.log(`Current Time: ${currentTime}, Duration: ${duration}`);
-        if (duration > 0 && currentTime >= duration - 0.1) {
-          video.pause();
-          setShowBanner(true);
-        }
-      }
-    }, [currentTime, currentVideo, isPlaying, duration]);
-  
-    const handleTryAgain = () => {
-      setSelectedWords([]);
-      setShowFeedback(false);
-    };
-    useEffect(() => {
-      setSelectedWords([]);
-      setShowFeedback(false);
-    }, [currentVideo]);
-    useEffect(() => {
-      const video = videoRef.current;
-      if (!video) return;
-  
-      const handleTimeUpdate = () => setCurrentTime(video.currentTime);
-      const handlePlay = () => setIsPlaying(true);
-      const handlePause = () => setIsPlaying(false);
-      const handleLoadedData = () => setDuration(video.duration);
-  
-      video.addEventListener('timeupdate', handleTimeUpdate);
-      video.addEventListener('play', handlePlay);
-      video.addEventListener('pause', handlePause);
-      video.addEventListener('loadeddata', handleLoadedData);
-  
+
+    setExtraBubble(bubbleToShow || null);
+
+  }, [currentVideo, currentTime]);
+  useEffect(() => {
+    const nextVideoIndex = currentVideo + 1;
+    if (nextVideoIndex < videos.length) {
+      const nextVideoUrl = videos[nextVideoIndex].url;
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = nextVideoUrl;
+      document.head.appendChild(link);
       return () => {
-        video.removeEventListener('timeupdate', handleTimeUpdate);
-        video.removeEventListener('play', handlePlay);
-        video.removeEventListener('pause', handlePause);
-        video.removeEventListener('loadeddata', handleLoadedData);
+        document.head.removeChild(link);
       };
-    }, []);
-    useEffect(() => {
-      if (showBanner && videoRef.current) {
-        videoRef.current.pause();
+    }
+  }, [currentVideo, videos]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (currentVideo === 4 && isPlaying) {
+      console.log(`Current Time: ${currentTime}, Duration: ${duration}`);
+      if (duration > 0 && currentTime >= duration - 0.1) {
+        video.pause();
+        setShowBanner(true);
       }
-    }, [showBanner]);
-  
-    useEffect(() => {
-      if (videoRef.current) {
-        videoRef.current.load();
-        setCurrentTime(0);
-        setShowBubble(true);
-  
-        // حاول تشغيل الفيديو الجديد تلقائيًا
-        const playPromise = videoRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // لا بأس، المتصفح منع التشغيل التلقائي
-          });
-        }
+    }
+  }, [currentTime, currentVideo, isPlaying, duration]);
+
+  const handleTryAgain = () => {
+    setSelectedWords([]);
+    setShowFeedback(false);
+  };
+  useEffect(() => {
+    setSelectedWords([]);
+    setShowFeedback(false);
+  }, [currentVideo]);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => setCurrentTime(video.currentTime);
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleLoadedData = () => setDuration(video.duration);
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+    video.addEventListener('loadeddata', handleLoadedData);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      video.removeEventListener('loadeddata', handleLoadedData);
+    };
+  }, []);
+  useEffect(() => {
+    if (showBanner && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showBanner]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      setCurrentTime(0);
+      setShowBubble(true);
+
+      // حاول تشغيل الفيديو الجديد تلقائيًا
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // لا بأس، المتصفح منع التشغيل التلقائي
+        });
       }
-    }, [currentVideo]);
-    useEffect(() => {
-      if (showBanner && videoRef.current) {
-        videoRef.current.pause();
-      }
-    }, [showBanner]);
-  
-  
-    useEffect(() => {
-      const handleFullscreenChange = () => {
-        setIsFullscreen(!!document.fullscreenElement);
-      };
-      document.addEventListener('fullscreenchange', handleFullscreenChange);
-      return () => {
-        document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      };
-    }, []);
-    useEffect(() => {
-      if (videoRef.current) {
-        videoRef.current.playbackRate = playbackSpeed;
-      }
-    }, [currentVideo, isPlaying, playbackSpeed]);
-    const handlePrevious = () => {
-      setCurrentVideo(prev => (prev > 0 ? prev - 1 : videos.length - 1));
+    }
+  }, [currentVideo]);
+  useEffect(() => {
+    if (showBanner && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showBanner]);
+
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = playbackSpeed;
+    }
+  }, [currentVideo, isPlaying, playbackSpeed]);
+  const handlePrevious = () => {
+    setCurrentVideo(prev => (prev > 0 ? prev - 1 : videos.length - 1));
+    setShowBanner(false);
+  };
+  const handleNext = () => {
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
       setShowBanner(false);
-    };
-    const handleNext = () => {
-      if (currentVideo === videos.length - 1) {
-        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-      } else {
-        setCurrentVideo(prev => prev + 1);
-        setShowBanner(false);
-      }
-    };
-    const togglePlay = () => {
+    }
+  };
+  const togglePlay = () => {
     if (selectedWords.length === 1) {
       handleNext();
       return;
@@ -471,82 +471,82 @@ export const StoryPage = () => {
 
     setIsPlaying(!isPlaying);
   };
-    const toggleMute = () => {
-      setIsMuted(prev => !prev);
-    };
-    const selectPlaybackSpeed = (speed) => {
-      setPlaybackSpeed(speed);
-      if (videoRef.current) {
-        videoRef.current.playbackRate = speed;
+  const toggleMute = () => {
+    setIsMuted(prev => !prev);
+  };
+  const selectPlaybackSpeed = (speed) => {
+    setPlaybackSpeed(speed);
+    if (videoRef.current) {
+      videoRef.current.playbackRate = speed;
+    }
+    setShowSpeedMenu(false);
+  };
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (videoRef.current) {
+      videoRef.current.volume = newVolume;
+    }
+    setIsMuted(newVolume === 0);
+  };
+  const toggleFullscreen = () => {
+    const container = fullscreenContainerRef.current;
+    if (!container) return;
+
+    if (!document.fullscreenElement) {
+      container.requestFullscreen().catch(err => {
+        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        settingsPopupRef.current &&
+        !settingsPopupRef.current.contains(event.target)
+      ) {
+        setShowSettingsPopup(false);
+
       }
-      setShowSpeedMenu(false);
     };
-    const handleVolumeChange = (e) => {
-      const newVolume = parseFloat(e.target.value);
-      setVolume(newVolume);
+
+    if (showSettingsPopup) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () =>
+      document.removeEventListener('mousedown', handleClickOutside);
+  }, [showSettingsPopup]);
+
+
+  const handleEnded = useCallback(() => {
+    if (currentVideo === 4) {
+      setShowBanner(true);
       if (videoRef.current) {
-        videoRef.current.volume = newVolume;
+        videoRef.current.pause();
+        videoRef.current.currentTime = videoRef.current.duration;
       }
-      setIsMuted(newVolume === 0);
-    };
-    const toggleFullscreen = () => {
-      const container = fullscreenContainerRef.current;
-      if (!container) return;
-  
-      if (!document.fullscreenElement) {
-        container.requestFullscreen().catch(err => {
-          alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-        });
+    }
+    else if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    }
+    else {
+      setShowBanner(false);
+      if (autoPlayNext) {
+        setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : prev));
       } else {
-        document.exitFullscreen();
-      }
-    };
-  
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (
-          settingsPopupRef.current &&
-          !settingsPopupRef.current.contains(event.target)
-        ) {
-          setShowSettingsPopup(false);
-  
-        }
-      };
-  
-      if (showSettingsPopup) {
-        document.addEventListener('mousedown', handleClickOutside);
-      }
-  
-      return () =>
-        document.removeEventListener('mousedown', handleClickOutside);
-    }, [showSettingsPopup]);
-  
-  
-    const handleEnded = useCallback(() => {
-      if (currentVideo === 4) {
-        setShowBanner(true);
         if (videoRef.current) {
           videoRef.current.pause();
-          videoRef.current.currentTime = videoRef.current.duration;
         }
       }
-      else if (currentVideo === videos.length - 1) {
-        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-      }
-      else {
-        setShowBanner(false);
-        if (autoPlayNext) {
-          setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : prev));
-        } else {
-          if (videoRef.current) {
-            videoRef.current.pause();
-          }
-        }
-      }
-    }, [currentVideo, videos.length, navigate, unitId, lessonId, autoPlayNext]);
-  
+    }
+  }, [currentVideo, videos.length, navigate, unitId, lessonId, autoPlayNext]);
 
-    const handleTextSelection = () => {
+
+  const handleTextSelection = () => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return;
 
@@ -629,18 +629,18 @@ export const StoryPage = () => {
       return newWords;
     });
   };
-  
-    return (
-      <div className="story-page-container">
-        {isLoading && (
-          <div className="loading-overlay">
-            <div className="spinner"></div>
-          </div>
-        )}
-        <div className="w-full max-w-6xl">
-          <div ref={fullscreenContainerRef} className="video-wrapper">
-  
-           <video
+
+  return (
+    <div className="story-page-container">
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
+      <div className="w-full max-w-6xl">
+        <div ref={fullscreenContainerRef} className="video-wrapper">
+
+          <video
             ref={videoRef}
             className={`
     w-full
@@ -654,295 +654,300 @@ export const StoryPage = () => {
             preload="auto"
             src={currentVideoData.url}
           >
-              Your browser does not support the video tag.
-            </video>
-  
-            {showWrongFeedback && currentVideo === 4 && showBanner &&(
-              <div className="wrong-feedback">
-                Try Again! ❌
-              </div>
-            )}
-  
-            {showFeedback && (
-              <div className="feedback-popup">
-                Good Job! 👍
-              </div>
-            )}
-  
-            {currentVideo === 4 && showBanner && (
-              <div className="instruction-banner show">
-                <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
-                  Highlight how Emma felt after helping
-                </p>
-                <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
-                  her parents.
-                </p>
-              </div>
-            )}
-  
-            {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
-              <div className="subtitle-container" style={bubbleStyle}>
-  
-                <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-        `}>
-                  <p
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseUp}
-                    style={{ userSelect: 'text', cursor: 'text' }}
-                  >
-                    {activeSubtitle.words.map((word, index) => {
-                      const isHighlighted = currentTime >= word.start && currentTime < word.end;
-                      const cleanWord = word.text.replace(/[.,?!]/g, '');
-                      const isSelected = selectedWords.some(w =>
-                        w.toLowerCase() === cleanWord.toLowerCase()
-                      );
-  
-                      return (
-                        <span
-                          key={index}
-                          onClick={() => handleWordClick(word.text)}
-                          className={`word-span 
+            Your browser does not support the video tag.
+          </video>
+
+          {showWrongFeedback && currentVideo === 4 && showBanner && (
+            <div className="wrong-feedback">
+              Try Again! ❌
+            </div>
+          )}
+
+          {showFeedback && (
+            <div className="feedback-popup">
+              Good Job! 👍
+            </div>
+          )}
+
+          {currentVideo === 4 && showBanner && (
+            <div className="instruction-banner show">
+              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
+                Highlight how Emma felt after helping
+              </p>
+              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
+                her parents.
+              </p>
+            </div>
+          )}
+
+          {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
+            <div className="subtitle-container" style={bubbleStyle}>
+
+              <div
+                className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 ? "question-bubble" : ""}
+    ${cloudPositions[currentVideo]?.isFlipped ? "flipped" : ""}
+  `}
+              >
+
+                <p
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
+                  style={{ userSelect: 'text', cursor: 'text' }}
+                >
+                  {activeSubtitle.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    const cleanWord = word.text.replace(/[.,?!]/g, '');
+                    const isSelected = selectedWords.some(w =>
+                      w.toLowerCase() === cleanWord.toLowerCase()
+                    );
+
+                    return (
+                      <span
+                        key={index}
+                        onClick={() => handleWordClick(word.text)}
+                        className={`word-span 
                 ${isHighlighted && textHighlight ? 'active-word' : ''} 
                 ${isSelected ? 'selected-word' : ''}`}
-                        >
-                          {word.text}{' '}
-                        </span>
-                      );
-                    })}
-                  </p>
-  
-                
-                </div>
-              </div>
-            )}
-  
-            {showCaption && extraBubble && extraBubble.words && (
-              <div
-                className="subtitle-container"
-                style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
-              >
-                <div className="extra-cloud animate__animated animate__fadeIn">
-                  <p>
-                    {extraBubble.words.map((word, index) => {
-                      const isHighlighted = currentTime >= word.start && currentTime < word.end;
-                      return (
-                        <span
-                          key={index}
-                          className={`word-span ${isHighlighted && narrationHighlight ? 'active-word' : ''}`}
-                        >
-                          {word.text}{' '}
-                        </span>
-                      );
-                    })}
-                  </p>
-                </div>
-              </div>
-            )}
-  
-            <div className="video-overlay" />
-            <div className="controls-container">
-  
-              <div className="controlbbtn">
-                <button onClick={handlePrevious} className="control-btn left-nav-btn">
-                  <ChevronLeft className="w-8 h-8" />
-                </button>
-  
-                <button onClick={handleNext} className="control-btn right-nav-btn">
-                  <ChevronRight className="w-8 h-8" />
-                </button>
-              </div>
-  
-              <div className="controls-wrapper-new">
-                <div className="controls-row">
-                  <div className="controls-group-left">
-  
-                    <div className="settings-container">
-                      <button
-                        onClick={() => setShowSettingsPopup(prev => !prev)}
-                        className="control-btn settings-btn"
-                        title="Settings"
                       >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="control-label">Settings</span>
-                      </button>
-  
-                      {showSettingsPopup && (
-                        <>
-                          {/* 1. الخلفية الضبابية (Overlay) */}
-                          <div className="settings-overlay" onClick={() => setShowSettingsPopup(false)}></div>
-  
-                          {/* 2. حاوية النافذة لتوسيطها */}
-                          <div className="settings-popup-container">
-                            <div ref={settingsPopupRef} className="settings-popup">
-                              <button
-                                onClick={() => setShowSettingsPopup(false)}
-                                className="close-popup-btn"
-                              >
-                                ×
-                              </button>
-  
-                              <h3>Settings</h3>
-  
-                              <div className="settings-options-grid">
-                                <div className="setting-item">
-                                  <span className="setting-label">Conversation Caption</span>
-                                  <label className="toggle-switch">
-                                    <input
-                                      type="checkbox"
-                                      checked={showSubtitles}
-                                      onChange={() => setShowSubtitles(!showSubtitles)}
-                                    />
-                                    <span className="toggle-slider"></span>
-                                  </label>
-                                </div>
-  
-                                <div className="setting-item">
-                                  <span className="setting-label">Text Highlight</span>
-                                  <label className="toggle-switch">
-                                    <input
-                                      type="checkbox"
-                                      checked={textHighlight}
-                                      onChange={() => setTextHighlight(!textHighlight)}
-                                    />
-                                    <span className="toggle-slider"></span>
-                                  </label>
-                                </div>
-  
-                                <div className="setting-item">
-                                  <span className="setting-label">Narration</span>
-                                  <label className="toggle-switch">
-                                    <input
-                                      type="checkbox"
-                                      checked={showCaption}
-                                      onChange={() => setShowCaption(!showCaption)}
-                                    />
-                                    <span className="toggle-slider"></span>
-                                  </label>
-                                </div>
-  
-                                <div className="setting-item">
-                                  <span className="setting-label">Narration Highlight</span>
-                                  <label className="toggle-switch">
-                                    <input
-                                      type="checkbox"
-                                      checked={narrationHighlight}
-                                      onChange={() => setNarrationHighlight(!narrationHighlight)}
-                                    />
-                                    <span className="toggle-slider"></span>
-                                  </label>
-                                </div>
-  
-                                <div className="setting-item">
-                                  <span className="setting-label">Auto Page Turn</span>
-                                  <label className="toggle-switch">
-                                    <input
-                                      type="checkbox"
-                                      checked={autoPlayNext}
-                                      onChange={() => setAutoPlayNext(!autoPlayNext)}
-                                    />
-                                    <span className="toggle-slider"></span>
-                                  </label>
-                                </div>
+                        {word.text}{' '}
+                      </span>
+                    );
+                  })}
+                </p>
+
+
+              </div>
+            </div>
+          )}
+
+          {showCaption && extraBubble && extraBubble.words && (
+            <div
+              className="subtitle-container"
+              style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
+            >
+              <div className="extra-cloud animate__animated animate__fadeIn">
+                <p>
+                  {extraBubble.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    return (
+                      <span
+                        key={index}
+                        className={`word-span ${isHighlighted && narrationHighlight ? 'active-word' : ''}`}
+                      >
+                        {word.text}{' '}
+                      </span>
+                    );
+                  })}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="video-overlay" />
+          <div className="controls-container">
+
+            <div className="controlbbtn">
+              <button onClick={handlePrevious} className="control-btn left-nav-btn">
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+
+              <button onClick={handleNext} className="control-btn right-nav-btn">
+                <ChevronRight className="w-8 h-8" />
+              </button>
+            </div>
+
+            <div className="controls-wrapper-new">
+              <div className="controls-row">
+                <div className="controls-group-left">
+
+                  <div className="settings-container">
+                    <button
+                      onClick={() => setShowSettingsPopup(prev => !prev)}
+                      className="control-btn settings-btn"
+                      title="Settings"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="control-label">Settings</span>
+                    </button>
+
+                    {showSettingsPopup && (
+                      <>
+                        {/* 1. الخلفية الضبابية (Overlay) */}
+                        <div className="settings-overlay" onClick={() => setShowSettingsPopup(false)}></div>
+
+                        {/* 2. حاوية النافذة لتوسيطها */}
+                        <div className="settings-popup-container">
+                          <div ref={settingsPopupRef} className="settings-popup">
+                            <button
+                              onClick={() => setShowSettingsPopup(false)}
+                              className="close-popup-btn"
+                            >
+                              ×
+                            </button>
+
+                            <h3>Settings</h3>
+
+                            <div className="settings-options-grid">
+                              <div className="setting-item">
+                                <span className="setting-label">Conversation Caption</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={showSubtitles}
+                                    onChange={() => setShowSubtitles(!showSubtitles)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Text Highlight</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={textHighlight}
+                                    onChange={() => setTextHighlight(!textHighlight)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Narration</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={showCaption}
+                                    onChange={() => setShowCaption(!showCaption)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Narration Highlight</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={narrationHighlight}
+                                    onChange={() => setNarrationHighlight(!narrationHighlight)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Auto Page Turn</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={autoPlayNext}
+                                    onChange={() => setAutoPlayNext(!autoPlayNext)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
                               </div>
                             </div>
                           </div>
-                        </>
-                      )}
-                    </div>
-  
-                    <div
-                      className="volume-control"
-                      onMouseEnter={() => setShowVolumeSlider(true)}
-                      onMouseLeave={() => setShowVolumeSlider(false)}
-                    >
-                      <button onClick={toggleMute} className="control-btn">
-                        {isMuted || volume === 0 ? (
-                          <VolumeX className="w-6 h-6" />
-                        ) : (
-                          <Volume2 className="w-6 h-6" />
-                        )}
-                      </button>
-                      {showVolumeSlider && (
-                        <div className="volume-slider-container">
-                          <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.1"
-                            value={volume}
-                            onChange={handleVolumeChange}
-                            className="volume-slider"
-                            orient="vertical"
-                          />
                         </div>
-                      )}
-                    </div>
-  
-                    <div className="speed-control-container">
-                      <button
-                        onClick={() => setShowSpeedMenu(prev => !prev)}
-                        className="control-btn speed-btn"
-                        title="Playback Speed"
-                      >
-                        <span className="speed-label">{playbackSpeed}x</span>
-                      </button>
-  
-                      {showSpeedMenu && (
-                        <ul className="speed-dropdown-list">
-                          {availableSpeeds.map((speed) => (
-                            <li
-                              key={speed}
-                              onClick={() => selectPlaybackSpeed(speed)}
-                              className={playbackSpeed === speed ? 'active-speed' : ''}
-                            >
-                              {speed}x
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+                      </>
+                    )}
                   </div>
-  
-                  <div className="controls-group-center">
-                    <button onClick={togglePlay} className="control-btn play-btn">
-                      {isPlaying ? (
-                        <Pause className="w-12 h-12" fill="white" />
+
+                  <div
+                    className="volume-control"
+                    onMouseEnter={() => setShowVolumeSlider(true)}
+                    onMouseLeave={() => setShowVolumeSlider(false)}
+                  >
+                    <button onClick={toggleMute} className="control-btn">
+                      {isMuted || volume === 0 ? (
+                        <VolumeX className="w-6 h-6" />
                       ) : (
-                        <Play className="w-12 h-12" fill="white" />
+                        <Volume2 className="w-6 h-6" />
                       )}
                     </button>
+                    {showVolumeSlider && (
+                      <div className="volume-slider-container">
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.1"
+                          value={volume}
+                          onChange={handleVolumeChange}
+                          className="volume-slider"
+                          orient="vertical"
+                        />
+                      </div>
+                    )}
                   </div>
-  
-                  <div className="controls-group-right">
-                    <button onClick={toggleFullscreen} className="control-btn">
-                      {isFullscreen ? (
-                        <Minimize2 className="w-6 h-6" />
-                      ) : (
-                        <Maximize2 className="w-6 h-6" />
-                      )}
+
+                  <div className="speed-control-container">
+                    <button
+                      onClick={() => setShowSpeedMenu(prev => !prev)}
+                      className="control-btn speed-btn"
+                      title="Playback Speed"
+                    >
+                      <span className="speed-label">{playbackSpeed}x</span>
                     </button>
+
+                    {showSpeedMenu && (
+                      <ul className="speed-dropdown-list">
+                        {availableSpeeds.map((speed) => (
+                          <li
+                            key={speed}
+                            onClick={() => selectPlaybackSpeed(speed)}
+                            className={playbackSpeed === speed ? 'active-speed' : ''}
+                          >
+                            {speed}x
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
+
+                <div className="controls-group-center">
+                  <button onClick={togglePlay} className="control-btn play-btn">
+                    {isPlaying ? (
+                      <Pause className="w-12 h-12" fill="white" />
+                    ) : (
+                      <Play className="w-12 h-12" fill="white" />
+                    )}
+                  </button>
+                </div>
+
+                <div className="controls-group-right">
+                  <button onClick={toggleFullscreen} className="control-btn">
+                    {isFullscreen ? (
+                      <Minimize2 className="w-6 h-6" />
+                    ) : (
+                      <Maximize2 className="w-6 h-6" />
+                    )}
+                  </button>
+                </div>
               </div>
-  
             </div>
-  
-            <div className="progress-indicator-container">
-              {videos.map((_, index) => (
-                <div
-                  key={index}
-                  className={`progress-dot ${index === currentVideo ? 'active' : ''}`}
-                />
-              ))}
-            </div>
+
+          </div>
+
+          <div className="progress-indicator-container">
+            {videos.map((_, index) => (
+              <div
+                key={index}
+                className={`progress-dot ${index === currentVideo ? 'active' : ''}`}
+              />
+            ))}
           </div>
         </div>
       </div>
-    );
-  };
-  export default StoryPage;
+    </div>
+  );
+};
+export default StoryPage;
