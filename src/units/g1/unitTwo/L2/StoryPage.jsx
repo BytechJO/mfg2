@@ -197,8 +197,8 @@ export const StoryPage = () => {
     4: [
       { top: '30%', left: '7%' },
       { top: '10%', left: '15%' },
-      { top: '25%', left: '8%' },
-      { top: '10%', left: '70%', isFlipped: true },
+      { top: '12%', left: '10%' },
+      { top: '10%', left: '70%', isFlipped: false },
       { top: '10%', left: '60%', isFlipped: true },
     ],
     5: [
@@ -658,6 +658,11 @@ export const StoryPage = () => {
     });
   };
 
+  const isLastSubtitle =
+  activeSubtitleIndex !== -1 &&
+  activeSubtitleIndex === currentVideoData.subtitles.length - 1;
+
+
   return (
     <div className="story-page-container">
       {isLoading && (
@@ -708,8 +713,13 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-        `}>
+              <div
+  className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 && isLastSubtitle ? "question-bubble" : ""}
+    ${bubbleStyle.isFlipped ? "flipped" : ""}
+  `}
+>
+
                 <p
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}

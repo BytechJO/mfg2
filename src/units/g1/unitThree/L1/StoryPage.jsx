@@ -177,14 +177,14 @@ export const StoryPage = () => {
     ],
 
     1: [
-      { top: "15%", left: "70%", isFlipped: true },
-      { top: "10%", left: "55%", isFlipped: true },
+      { top: "15%", left: "20%", isFlipped: false },
+      { top: "10%", left: "5%", isFlipped: false },
     ],
 
     2: [
-      { top: "20%", right: "0%", isFlipped: true },
-      { top: "1%", left: "50%", isFlipped: true },
-      { top: "1%", left: "45%", isFlipped: true },
+      { top: "20%", right: "40%", isFlipped: false },
+      { top: "1%", left: "10%", isFlipped: true },
+      { top: "1%", left: "8%", isFlipped: true },
     ],
 
     3: [

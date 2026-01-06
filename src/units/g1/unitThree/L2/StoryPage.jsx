@@ -245,13 +245,13 @@ export const StoryPage = () => {
 
     3: [
       { bottom: "75%", left: "60%", isFlipped: true },
-      { top: "8%", left: "28%", isFlipped: true },
+      { top: "8%", left: "28%", isFlipped: false },
       { top: "10%", left: "40%" },
       { top: "10%", left: "35%" },
     ],
 
     4: [
-      { top: "15%", left: "23%", isFlipped: true },
+      { top: "20%", left: "60%", isFlipped: false },
       { top: "5%", left: "25%", isFlipped: true },
       { top: "10%", left: "10%" },
       { top: "10%", left: "10%" },
@@ -679,7 +679,7 @@ export const StoryPage = () => {
     if (!selectedText) return;
 
 
-    const allCorrectWords = ["good","job","bob","you","tried"];
+    const allCorrectWords = ["good", "job", "bob", "you", "tried"];
 
     const wordsInSelection = selectedText
       .split(/\s+/)
@@ -726,7 +726,7 @@ export const StoryPage = () => {
   const handleWordClick = (word) => {
     const cleanWord = word.toLowerCase().replace(/[.,?!]/g, "");
     const allCorrectWords = [
-      "its","okay","bob","you","tried"
+      "its", "okay", "bob", "you", "tried"
     ];
     if (!allCorrectWords.includes(cleanWord)) {
       setShowWrongFeedback(true);
@@ -754,6 +754,12 @@ export const StoryPage = () => {
       return newWords;
     });
   };
+
+
+  const isLastSubtitle =
+    activeSubtitleIndex !== -1 &&
+    activeSubtitleIndex === currentVideoData.subtitles.length - 1;
+
 
   return (
     <div className="story-page-container">
@@ -805,8 +811,12 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-        `}>
+              <div
+                className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 && isLastSubtitle ? "question-bubble" : ""}
+    ${bubbleStyle.isFlipped ? "flipped" : ""}
+  `}
+              >
                 <p
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}
@@ -833,7 +843,7 @@ export const StoryPage = () => {
                   })}
                 </p>
 
-                
+
               </div>
             </div>
           )}
