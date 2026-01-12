@@ -14,11 +14,17 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import "../../shared/StoryPage.css";
 
-const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802258/1_plbamj.mp4";
-const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802263/2_qhjuxd.mp4";
-const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802269/3_wx3xag.mp4";
-const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802269/4_srjl6o.mp4";
-const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802272/5_s2otgy.mp4";
+// const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802258/1_plbamj.mp4";
+// const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802263/2_qhjuxd.mp4";
+// const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802269/3_wx3xag.mp4";
+// const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802269/4_srjl6o.mp4";
+// const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802272/5_s2otgy.mp4";
+
+import video1 from '../L2/assets/1.mp4';
+import video2 from '../L2/assets/2.mp4';
+import video3 from '../L2/assets/3.mp4';
+import video4 from '../L2/assets/4.mp4';
+import video5 from '../L2/assets/5.mp4';
 
 const posters = [
   "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_plbamj.jpg",

@@ -3,11 +3,17 @@ import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Ma
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 
-const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800879/1_fdv7of.mp4";
-const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800886/2_mybqsu.mp4";
-const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800885/3_cmsoy0.mp4";
-const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800889/4_ln0wny.mp4";
-const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800893/5_ntzo1k.mp4";
+// const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800879/1_fdv7of.mp4";
+// const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800886/2_mybqsu.mp4";
+// const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800885/3_cmsoy0.mp4";
+// const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800889/4_ln0wny.mp4";
+// const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765800893/5_ntzo1k.mp4";
+
+import video1 from '../L1/assets/1.mp4';
+import video2 from '../L1/assets/2.mp4';
+import video3 from '../L1/assets/3.mp4';
+import video4 from '../L1/assets/4.mp4';
+import video5 from '../L1/assets/5.mp4';
 
 const videoPosters = [
   "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_fdv7of.jpg",
