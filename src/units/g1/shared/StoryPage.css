@@ -112,6 +112,12 @@
   cursor: pointer;
   transition: color 0.2s ease-in-out;
 }
+.bubble-cloud.no-tail::before {
+  display: none;
+}
+.bubble-cloud.no-tail::after {
+  display: none;
+}
 
 .active-word {
   color: #db2777;
@@ -298,7 +304,6 @@
   left: 0;
   right: 0;
   padding: 1rem 2rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   transition: opacity 0.3s;
 }
 
@@ -379,7 +384,6 @@
   left: 0;
   right: 0;
   padding: 0.625rem 1.25rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 20;
@@ -563,8 +567,8 @@ html {
   right: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
     transparent 100%
   );
   padding: 20px;

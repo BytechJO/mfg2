@@ -89,7 +89,7 @@ export const QuizPage = () => {
 
           <div className="content">
             <div className="questions">
-            <div className="Q1">
+            <div className="Q1 mt-[-3%]">
               <span>What happened to Beth when she felt angry?</span>
               <ul>
                 <li>
@@ -112,7 +112,8 @@ export const QuizPage = () => {
 
             {/* --- Question 2 --- */}
             <div className="Q2">
-              <span>What did Beth do to help her control her anger?</span>
+              <span>What did Beth do to help her control <br />
+  <span className="line-break" />her anger?</span>
               <ul>
                 <li>
                  <p> She shouted at her sister.</p>

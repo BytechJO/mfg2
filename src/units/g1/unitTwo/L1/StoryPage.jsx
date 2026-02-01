@@ -15,14 +15,6 @@ import video3 from '../L1/assets/3.mp4';
 import video4 from '../L1/assets/4.mp4';
 import video5 from '../L1/assets/5.mp4';
 
-const posters = [
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_z09nin.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_iucugh.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_igmikv.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_q2b6qs.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_g2ajkd.jpg",
-];
-
 
 export const StoryPage = () => {
   const [showCaption, setShowCaption] = useState(true);
@@ -97,7 +89,7 @@ export const StoryPage = () => {
           words: [
             { text: "That", start: 23.0, end: 23.3 },
             { text: "feels", start: 23.3, end: 23.7 },
-            { text: "better,", start: 23.7, end: 24.0 },
+            { text: "better.", start: 23.7, end: 24.0 },
           ]
         },
 
@@ -110,7 +102,7 @@ export const StoryPage = () => {
       title: "Section 5",
       subtitles: [
         {
-          start: 24.0, end: 30.0,
+          start: 28.0, end: 30.0,
           words: [
             { text: "Beth", start: 24.1, end: 24.4 },
             { text: "is", start: 24.4, end: 24.7 },
@@ -203,7 +195,7 @@ export const StoryPage = () => {
         { text: "leaves", start: 9.3, end: 9.7 },
         { text: "it", start: 9.7, end: 9.9 },
         { text: "on", start: 9.9, end: 10.2 },
-        { text: "the,", start: 10.2, end: 10.4 },
+        { text: "the", start: 10.2, end: 10.4 },
         { text: "table", start: 10.4, end: 10.8 },
         { text: "and", start: 11.5, end: 11.8 },
         { text: "goes", start: 11.8, end: 12.1 },
@@ -267,7 +259,7 @@ export const StoryPage = () => {
         { text: "did", start: 10.0, end: 10.3 },
         { text: "it!", start: 10.3, end: 10.6 },
         { text: "Beth", start: 12.0, end: 12.3 },
-        { text: "feels,", start: 12.3, end: 12.6 },
+        { text: "feels", start: 12.3, end: 12.6 },
         { text: "angry.", start: 12.6, end: 12.9 },
       ]
     },
@@ -308,9 +300,9 @@ export const StoryPage = () => {
         { text: "She", start: 20.5, end: 20.8 },
         { text: "knows", start: 20.8, end: 21.1 },
         { text: "her", start: 21.1, end: 21.4 },
-        { text: "four-", start: 21.4, end: 21.7 },
-        { text: "year", start: 21.7, end: 22.0 },
-        { text: "-old", start: 22.0, end: 22.3 },
+        { text: "four", start: 21.4, end: 21.7 },
+        { text: "- year -", start: 21.7, end: 22.0 },
+        { text: "old", start: 22.0, end: 22.3 },
         { text: "sister", start: 22.3, end: 22.6 },
         { text: "drew", start: 22.6, end: 22.9 },
         { text: "on her", start: 22.9, end: 23.1 },
@@ -325,7 +317,7 @@ export const StoryPage = () => {
       words: [
         { text: "Sofia,", start: 0, end: 0.8 },
         { text: "Beth’s", start: 0.8, end: 1.2 },
-        { text: "sister", start: 1.2, end: 1.5 },
+        { text: "sister,", start: 1.2, end: 1.5 },
         { text: "walks", start: 1.5, end: 1.8 },
         { text: "into", start: 1.8, end: 2.1 },
         { text: "the", start: 2.1, end: 2.4 },
@@ -419,7 +411,7 @@ export const StoryPage = () => {
       words: [
         { text: "Beth", start: 0.1, end: 0.4 },
         { text: "knows", start: 0.4, end: 0.7 },
-        { text: "that,", start: 0.7, end: 1.0 },
+        { text: "that", start: 0.7, end: 1.0 },
         { text: "Sofia", start: 1.0, end: 1.3 },
         { text: "just", start: 1.3, end: 1.6 },
         { text: "wanted", start: 1.6, end: 1.9 },
@@ -500,6 +492,20 @@ export const StoryPage = () => {
         { text: "safe.", start: 22.4, end: 22.7 },
       ]
     },
+    {
+      videoIndex:4, 
+      start: 24.0, end: 30.0,
+      words: [
+        { text: "Beth", start: 24.1, end: 24.4 },
+        { text: "is", start: 24.4, end: 24.7 },
+        { text: "happy", start: 24.7, end: 25.0 },
+        { text: "that", start: 25.0, end: 25.3 },
+        { text: "she", start: 25.3, end: 25.6 },
+        { text: "controlled", start: 25.6, end: 25.9 },
+        { text: "her", start: 25.9, end: 26.2 },
+        { text: "anger.", start: 26.2, end: 26.5 },
+      ]
+    },
 
   ];
 
@@ -549,20 +555,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;

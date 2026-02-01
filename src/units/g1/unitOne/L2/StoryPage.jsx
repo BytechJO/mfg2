@@ -402,20 +402,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
@@ -423,7 +423,7 @@ export const StoryPage = () => {
 
     if (currentVideo === 4 && isPlaying) {
       console.log(`Current Time: ${currentTime}, Duration: ${duration}`);
-      if (duration > 0 && currentTime >= duration - 0.1) {
+      if (duration > 0 && currentTime >= duration - 0.4) {
         video.currentTime = Math.max(duration - 0.5, 0);
         video.pause();
         setShowBanner(true);
@@ -742,7 +742,7 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
+              <div className={`bubble-cloud ${currentVideo === 4 && 'no-tail'} animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
       `}>
                 <p
                   onMouseDown={handleMouseDown}

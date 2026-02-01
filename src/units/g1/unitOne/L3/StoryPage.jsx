@@ -95,7 +95,7 @@ export const StoryPage = () => {
         },
 
         {
-          start: 3.5, end: 7.0,
+          start: 3.5, end: 6.5,
           words: [
             { text: "Pedestrians", start: 3.9, end: 4.3 },
             { text: "are", start: 4.3, end: 4.6 },
@@ -104,7 +104,7 @@ export const StoryPage = () => {
             { text: "or", start: 5.2, end: 5.5 },
             { text: "not", start: 5.5, end: 5.8 },
             { text: "in a", start: 5.8, end: 6.1 },
-            { text: "vehicle", start: 6.1, end: 6.5 }
+            { text: "vehicle.", start: 6.1, end: 6.5 }
           ]
         },
 
@@ -130,7 +130,7 @@ export const StoryPage = () => {
             { text: "man", start: 10.5, end: 10.7 },
             { text: "means", start: 10.7, end: 10.8 },
             { text: "cross", start: 10.8, end: 10.9 },
-            { text: "the road", start: 10.9, end: 11.5 }
+            { text: "the road.", start: 10.9, end: 11.5 }
           ]
         },
 
@@ -139,7 +139,7 @@ export const StoryPage = () => {
           words: [
             { text: "That’s", start: 12.5, end: 12.8 },
             { text: "right,", start: 12.8, end: 13.2 },
-            { text: "Beth,", start: 13.2, end: 13.5 }
+            { text: "Beth.", start: 13.2, end: 13.5 }
           ]
         },
 
@@ -159,7 +159,7 @@ export const StoryPage = () => {
             { text: "we", start: 18.5, end: 18.7 },
             { text: "cross", start: 18.7, end: 19.0 },
             { text: "the", start: 19.0, end: 19.3 },
-            { text: "road", start: 19.3, end: 19.6 }
+            { text: "road.", start: 19.3, end: 19.6 }
           ]
         },
       ]
@@ -311,7 +311,7 @@ export const StoryPage = () => {
       words: [
         { text: "Red", start: 0.1, end: 0.6 },
         { text: "means", start: 0.6, end: 1.2 },
-        { text: "stop", start: 1.2, end: 1.7 },
+        { text: "stop,", start: 1.2, end: 1.7 },
       ]
     },
     {
@@ -321,7 +321,7 @@ export const StoryPage = () => {
         { text: "yellow", start: 2.5, end: 2.8 },
         { text: "means", start: 2.8, end: 3.1 },
         { text: "slow", start: 3.1, end: 3.4 },
-        { text: "down", start: 3.4, end: 3.9 },
+        { text: "down,", start: 3.4, end: 3.9 },
       ]
     },
     {
@@ -343,7 +343,7 @@ export const StoryPage = () => {
         { text: "always", start: 9.2, end: 9.6 },
         { text: "follows", start: 9.6, end: 9.9 },
         { text: "traffic", start: 9.9, end: 10.2 },
-        { text: "rules", start: 10.2, end: 10.5 }
+        { text: "rules.", start: 10.2, end: 10.5 }
       ]
     },
 
@@ -394,7 +394,7 @@ export const StoryPage = () => {
         { text: "green", start: 10.9, end: 11.2 },
         { text: "man", start: 11.2, end: 11.5 },
         { text: "light", start: 11.5, end: 11.8 },
-        { text: "up", start: 11.8, end: 12.1 },
+        { text: "up.", start: 11.8, end: 12.1 },
         { text: "Next,", start: 12.1, end: 12.4 },
         { text: "they", start: 12.4, end: 12.7 },
         { text: "look", start: 12.7, end: 13.0 },
@@ -476,20 +476,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
@@ -802,7 +802,7 @@ export const StoryPage = () => {
           {currentVideo === 4 && showBanner && (
             <div className="instruction-banner show">
               <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
-                Highlight what Beth and Liz do befor
+                Highlight what Beth and Liz do before
               </p>
               <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
                 crossing the road.
@@ -813,7 +813,7 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
+              <div className={`bubble-cloud ${currentVideo === 4 && 'no-tail'} animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
        `}>
                 <p
                   onMouseDown={handleMouseDown}

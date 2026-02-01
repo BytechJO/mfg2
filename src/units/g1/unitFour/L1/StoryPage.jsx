@@ -26,15 +26,6 @@ import video3 from '../L1/assets/3.mp4';
 import video4 from '../L1/assets/4.mp4';
 import video5 from '../L1/assets/5.mp4';
 
-const posters = [
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_diiigp.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_kzrfcs.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_i2a8qy.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_c71dno.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_cvdtpq.jpg",
-];
-
-
 export const StoryPage = () => {
   const [extraBubble, setExtraBubble] = useState(null);
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -413,20 +404,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
@@ -623,7 +614,7 @@ export const StoryPage = () => {
     if (!selectedText) return;
 
 
-    const allCorrectWords = ["im","sorry","i", "broke", "your", "toy"];
+    const allCorrectWords = ["im", "sorry", "i", "broke", "your", "toy"];
 
     const wordsInSelection = selectedText
       .split(/\s+/)
@@ -670,7 +661,7 @@ export const StoryPage = () => {
   const handleWordClick = (word) => {
     const cleanWord = word.toLowerCase().replace(/[.,?!]/g, "");
     const allCorrectWords = [
-      "im","sorry","i", "broke", "your", "toy"
+      "im", "sorry", "i", "broke", "your", "toy"
     ];
     if (!allCorrectWords.includes(cleanWord)) {
       setShowWrongFeedback(true);
@@ -699,6 +690,9 @@ export const StoryPage = () => {
     });
   };
 
+  const isLastSubtitle =
+    activeSubtitleIndex !== -1 &&
+    activeSubtitleIndex === currentVideoData.subtitles.length - 1;
   return (
     <div className="story-page-container">
       {isLoading && (
@@ -752,8 +746,10 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-        `}>
+              <div className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 && isLastSubtitle ? "question-bubble" : ""}
+    ${bubbleStyle.isFlipped ? "flipped" : ""}
+  `}>
                 <p
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}
@@ -780,7 +776,7 @@ export const StoryPage = () => {
                   })}
                 </p>
 
-              
+
               </div>
             </div>
           )}

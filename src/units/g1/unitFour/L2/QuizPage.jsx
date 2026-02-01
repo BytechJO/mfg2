@@ -94,11 +94,11 @@ export const QuizPage = () => {
 
           <div className="content quizfix">
             <div className="questions">
-              <div className="Q1">
+              <div className="Q1 lg:mt-[-2.5%]">
                 <span>Mum wanted to bake cookies for ________.</span>
                 <ul>
                   <li>
-                    <p>Her friend </p>
+                    <p>Her friend. </p>
                     <input
                       type="radio"
                       name="q1"
@@ -109,7 +109,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "0")}
                   </li>
                   <li>
-                    <p>The neighbour </p>
+                    <p>The neighbour. </p>
                     <input
                       type="radio"
                       name="q1"
@@ -120,7 +120,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "1")}
                   </li>
                   <li>
-                    <p> Claire</p>
+                    <p> Claire.</p>
                     <input
                       type="radio"
                       name="q1"
@@ -148,7 +148,8 @@ export const QuizPage = () => {
                     {renderAnswerGif("q2", "0")}
                   </li>
                   <li>
-                    <p> She wanted to bake cookies for her grandparents. </p>
+                    <p> She wanted to bake cookies for her <br />
+  <span className="" />grandparents. </p>
                     <input
                       type="radio"
                       name="q2"
@@ -173,7 +174,8 @@ export const QuizPage = () => {
               </div>
 
               <div className="Q3">
-                <span>What did Mum and Claire do to show they were <br /> thinking of their friends?</span>
+                <span>What did Mum and Claire do to show they were <br />
+  <span className="line-break" /> thinking of their friends?</span>
                 <br />
                 <ul>
                   <li>

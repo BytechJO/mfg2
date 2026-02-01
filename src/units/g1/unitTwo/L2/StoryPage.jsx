@@ -15,14 +15,6 @@ import video3 from '../L2/assets/3.mp4';
 import video4 from '../L2/assets/4.mp4';
 import video5 from '../L2/assets/5.mp4';
 
-const posters = [
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_n4ngqf.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_eoxrdz.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_jygibj.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_qjkgrn.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_awszdx.jpg",
-];
-
 
 export const StoryPage = () => {
   const [extraBubble, setExtraBubble] = useState(null);
@@ -107,7 +99,7 @@ export const StoryPage = () => {
       title: "Section 4",
       subtitles: [
         {
-          start: 8.0, end: 9.0,
+          start: 8.0, end: 9.5,
           words: [
             { text: "Be", start: 8.0, end: 8.3 },
             { text: "careful,", start: 8.3, end: 8.6 },
@@ -131,16 +123,16 @@ export const StoryPage = () => {
             { text: "your", start: 7.0, end: 7.2 },
             { text: "new", start: 7.2, end: 7.4 },
             { text: "bike,", start: 7.4, end: 7.6 },
-            { text: "Leo,", start: 7.6, end: 7.8 },
+            { text: "Leo.", start: 7.6, end: 7.8 },
 
           ]
         },
         {
           start: 8.1, end: 9.8,
           words: [
-            { text: "it's", start: 8.2, end: 8.5 },
-            { text: "ok", start: 8.5, end: 8.8 },
-            { text: "zack", start: 8.8, end: 9.1 },
+            { text: "It’s", start: 8.2, end: 8.5 },
+            { text: "okay,", start: 8.5, end: 8.8 },
+            { text: "Zack.", start: 8.8, end: 9.1 },
           ]
         },
         {
@@ -149,23 +141,12 @@ export const StoryPage = () => {
             { text: "I'm", start: 9.9, end: 10.1 },
             { text: "glad", start: 10.1, end: 10.3 },
             { text: "you", start: 10.3, end: 10.5 },
-            { text: "did'nt", start: 10.5, end: 10.7 },
+            { text: "didn't", start: 10.5, end: 10.7 },
             { text: "get", start: 10.7, end: 10.9 },
-            { text: "hurt,", start: 10.9, end: 11.1 },
+            { text: "hurt.", start: 10.9, end: 11.1 },
           ]
         },
-        {
-          start: 16.6, end: 19.6,
-          words: [
-            { text: "Good", start: 16.6, end: 16.9 },
-            { text: "job,", start: 16.9, end: 17.2 },
-            { text: "Leo!", start: 17.2, end: 17.5 },
-            { text: "You", start: 18.5, end: 18.8 },
-            { text: "forgave", start: 18.8, end: 19.1 },
-            { text: "your", start: 19.1, end: 19.3 },
-            { text: "friend.", start: 19.3, end: 19.6 },
-          ]
-        },
+
         {
           start: 19.6, end: 21.0,
           words: [
@@ -197,14 +178,13 @@ export const StoryPage = () => {
     ],
 
     3: [
-      { bottom: '80%', left: '73%', isFlipped: true },
+      { bottom: '70%', left: '25%', isFlipped: true },
     ],
 
     4: [
       { top: '30%', left: '7%' },
       { top: '10%', left: '15%' },
       { top: '12%', left: '10%' },
-      { top: '10%', left: '70%', isFlipped: false },
       { top: '10%', left: '60%', isFlipped: true },
     ],
     5: [
@@ -326,6 +306,19 @@ export const StoryPage = () => {
         { text: "Zack.", start: 15.8, end: 16.1 },
       ]
     },
+    {
+      videoIndex: 4,
+      start: 16.6, end: 19.6,
+      words: [
+        { text: "Good", start: 16.6, end: 16.9 },
+        { text: "job,", start: 16.9, end: 17.2 },
+        { text: "Leo!", start: 17.2, end: 17.5 },
+        { text: "You", start: 18.5, end: 18.8 },
+        { text: "forgave", start: 18.8, end: 19.1 },
+        { text: "your", start: 19.1, end: 19.3 },
+        { text: "friend.", start: 19.3, end: 19.6 },
+      ]
+    },
   ];
 
 
@@ -378,20 +371,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
@@ -588,7 +581,7 @@ export const StoryPage = () => {
     if (!selectedText) return;
 
 
-    const allCorrectWords = ["its","ok","zack","im","glad", "you","didnt" ,"get", "hurt"];
+    const allCorrectWords = ["its", "ok", "zack", "im", "glad", "you", "didnt", "get", "hurt"];
 
     const wordsInSelection = selectedText
       .split(/\s+/)
@@ -635,7 +628,7 @@ export const StoryPage = () => {
   const handleWordClick = (word) => {
     const cleanWord = word.toLowerCase().replace(/[.,?!]/g, "");
     const allCorrectWords = [
-      "im","glad", "you","didnt" ,"get", "hurt"
+      "im", "glad", "you", "didnt", "get", "hurt"
     ];
     if (!allCorrectWords.includes(cleanWord)) {
       setShowWrongFeedback(true);
@@ -665,8 +658,8 @@ export const StoryPage = () => {
   };
 
   const isLastSubtitle =
-  activeSubtitleIndex !== -1 &&
-  activeSubtitleIndex === currentVideoData.subtitles.length - 1;
+    activeSubtitleIndex !== -1 &&
+    activeSubtitleIndex === currentVideoData.subtitles.length - 1;
 
 
   return (
@@ -720,11 +713,11 @@ export const StoryPage = () => {
             <div className="subtitle-container" style={bubbleStyle}>
 
               <div
-  className={`bubble-cloud animate__animated animate__fadeIn
+                className={`bubble-cloud animate__animated animate__fadeIn
     ${currentVideo === 4 && isLastSubtitle ? "question-bubble" : ""}
     ${bubbleStyle.isFlipped ? "flipped" : ""}
   `}
->
+              >
 
                 <p
                   onMouseDown={handleMouseDown}

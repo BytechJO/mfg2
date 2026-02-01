@@ -99,13 +99,14 @@ export const QuizPage = () => {
 
           <div className="content">
             <div className="questions">
-            <div className="Q1">
+            <div className="Q1 lg:mt-[-3%]">
               <span>
-                How did Emma feel when her parents asked her to help clean?
+                How did Emma feel when her parents <br />
+  <span className="line-break" />asked her to help clean?
               </span>
               <ul>
                 <li>
-                  <p> Happy</p>
+                  <p> Happy.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -115,7 +116,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "0")}
                 </li>
                 <li>
-                  <p> Sad</p>
+                  <p> Sad.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -125,7 +126,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "1")}
                 </li>
                 <li>
-                  <p> Mad</p>
+                  <p> Mad.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -139,10 +140,11 @@ export const QuizPage = () => {
 
             {/* --- Question 2 --- */}
             <div className="Q2">
-              <span>Which room did her parents ask Emma to help clean?</span>
+              <span>Which room did her parents ask Emma to <br />
+  <span className="line-break" />help clean?</span>
               <ul>
                 <li>
-                  <p> Kitchen</p>
+                  <p> Kitchen.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -152,7 +154,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "0")}
                 </li>
                 <li>
-                  <p> Bedroom</p>
+                  <p> Bedroom.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -162,7 +164,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "1")}
                 </li>
                 <li>
-                  <p> Living room</p>
+                  <p> Living room.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -211,7 +213,7 @@ export const QuizPage = () => {
               </ul>
             </div>
 </div>
-            <button type="button" id="submitBtn" onClick={handleSubmit}>
+            <button type="button" id="submitBtn" onClick={handleSubmit} className="lg:top-[60%]">
               Submit
             </button>
             {showSkip && (

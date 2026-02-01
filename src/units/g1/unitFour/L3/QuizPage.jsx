@@ -135,7 +135,7 @@ export const QuizPage = () => {
                 <span>Why didn’t Jade want to share her food?</span>
                 <ul>
                   <li>
-                    <p> She didn’t like to share</p>
+                    <p> She didn’t like to share.</p>
                     <input
                       type="radio"
                       name="q2"
@@ -155,7 +155,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q2", "1")}
                   </li>
                   <li>
-                    <p> She wanted to save her lunch for later</p>
+                    <p> She wanted to save her lunch for later.</p>
                     <input
                       type="radio"
                       name="q2"

@@ -9,21 +9,21 @@ function FeedBack() {
   const handleSubmit = () => {
     Swal.fire({
       icon: 'success',
-      title: 'Thank you for rating!',
-      text: 'We\'re appreciate it 💜',
+      title: 'You did a great job!',
+      text: 'Click on the  next lesson below to continue.',
       confirmButtonText: 'Done'
     });
   };
 
   return (
     <div id="p4" className="paper-feedback animate__animated animate__backInDown">
-      
-      
+
+
       <img src={Q2Image} alt="Feedback background" className="feedback-bg-img u2l1" />
-      
+
       <div
         className="stars-container absolute left-[47%] transform -translate-x-1/2 flex flex-col gap-12"
-        style={{ top: '60%' }}
+        style={{ top: '63%' }}
       >
         <StarRating value={0} />
         <StarRating value={0} />

@@ -9,8 +9,8 @@ function FeedBack() {
   const handleSubmit = () => {
     Swal.fire({
       icon: 'success',
-      title: 'Thank you for rating!',
-      text: 'We\'re appreciate it 💜',
+      title: 'You did a great job!',
+      text: 'Click on the  next lesson below to continue.',
       confirmButtonText: 'Done'
     });
   };

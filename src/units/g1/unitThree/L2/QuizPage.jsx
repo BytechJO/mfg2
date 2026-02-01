@@ -107,7 +107,7 @@ export const QuizPage = () => {
                   {renderAnswerGif('q1', '1')}
                 </li>
                 <li>
-                 <p> Sid fell downn</p>
+                 <p> Sid fell downn.</p>
                   <input type="radio" name="q1" value="2" onChange={handleChange} />
                   {renderAnswerGif('q1', '2')}
                 </li>
@@ -119,17 +119,17 @@ export const QuizPage = () => {
               <span>Who told Sid he should encourage others?</span>
               <ul>
                 <li>
-                 <p> His mum</p>
+                 <p> His mum.</p>
                   <input type="radio" name="q2" value="0" onChange={handleChange} />
                   {renderAnswerGif('q2', '0')}
                 </li>
                 <li>
-                 <p> His sister</p>
+                 <p> His sister.</p>
                   <input type="radio" name="q2" value="1" onChange={handleChange} />
                   {renderAnswerGif('q2', '1')}
                 </li>
                 <li>
-                 <p> His brother</p>
+                 <p> His brother.</p>
                   <input type="radio" name="q2" value="2" onChange={handleChange} />
                   {renderAnswerGif('q2', '2')}
                 </li>

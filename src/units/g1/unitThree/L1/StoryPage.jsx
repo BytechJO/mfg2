@@ -26,14 +26,6 @@ import video3 from '../L1/assets/3.mp4';
 import video4 from '../L1/assets/4.mp4';
 import video5 from '../L1/assets/5.mp4';
 
-const posters = [
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_rzkzmr.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_wapg1m.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_bu54do.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_uhuwy7.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_zsnkqu.jpg",
-];
-
 export const StoryPage = () => {
   const [extraBubble, setExtraBubble] = useState(null);
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -88,7 +80,7 @@ export const StoryPage = () => {
             { text: "I", start: 10.6, end: 10.9 },
             { text: "don’t", start: 10.9, end: 11.3 },
             { text: "want", start: 11.3, end: 11.7 },
-            { text: "to help", start: 11.7, end: 12.1 },
+            { text: "to help.", start: 11.7, end: 12.1 },
           ],
         },
       ],
@@ -120,7 +112,7 @@ export const StoryPage = () => {
             { text: "is", start: 4.5, end: 4.9 },
             { text: "a", start: 4.9, end: 5.1 },
             { text: "responsibility", start: 5.1, end: 5.5 },
-            { text: "too", start: 5.5, end: 6.5 },
+            { text: "too.", start: 5.5, end: 6.5 },
           ],
         },
 
@@ -128,13 +120,13 @@ export const StoryPage = () => {
           start: 6.5,
           end: 10,
           words: [
-            { text: "‘Families", start: 6.5, end: 6.9 },
+            { text: "Families", start: 6.5, end: 6.9 },
             { text: "work", start: 6.9, end: 7.2 },
             { text: "together", start: 7.2, end: 7.6 },
             { text: "and", start: 8.0, end: 8.3 },
             { text: "help", start: 8.3, end: 8.6 },
             { text: "each", start: 8.6, end: 8.9 },
-            { text: "other.’", start: 8.9, end: 9.3 },
+            { text: "other.", start: 8.9, end: 9.3 },
           ],
         },
       ],
@@ -158,7 +150,7 @@ export const StoryPage = () => {
       title: "Section 5",
       subtitles: [
         {
-          start: 6.0,
+          start: 9.0,
           end: 12,
           words: [
             { text: "Emma", start: 6.5, end: 6.7 },
@@ -300,8 +292,23 @@ export const StoryPage = () => {
         { text: "test", start: 4.1, end: 4.4 },
         { text: "faster.", start: 4.4, end: 4.8 },
       ],
-
-
+    },
+    {
+      videoIndex: 4,
+      start: 6.0,
+      end: 8.9,
+      words: [
+        { text: "Emma", start: 6.5, end: 6.7 },
+        { text: "is", start: 6.7, end: 6.9 },
+        { text: "happy", start: 6.9, end: 7.2 },
+        { text: "that", start: 7.2, end: 7.5 },
+        { text: "she", start: 7.5, end: 7.8 },
+        { text: "helped", start: 7.8, end: 8.1 },
+        { text: "her", start: 8.1, end: 8.4 },
+        { text: "parents", start: 8.4, end: 8.7 },
+        { text: "at", start: 8.7, end: 9.0 },
+        { text: "home.", start: 9.0, end: 9.3 },
+      ],
     },
   ];
 
@@ -350,20 +357,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;

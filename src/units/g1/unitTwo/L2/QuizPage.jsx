@@ -98,14 +98,15 @@ export const QuizPage = () => {
           {/* --- بداية التعديل --- */}
           <div className="content">
             <div className="questions">
-            <div className="Q1">
+            <div className="Q1 mt-[-3%]">
               <span>
-                What were Leo and Zack excited about at the beginning of the
+                What were Leo and Zack excited about <br />
+  <span className="line-break" />at the beginning of the
                 story?
               </span>
               <ul>
                 <li>
-                  <p>The weather</p>
+                  <p>The weather.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -115,7 +116,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "0")}
                 </li>
                 <li>
-                  <p> Leo’s new bike</p>
+                  <p> Leo’s new bike.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -125,7 +126,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "1")}
                 </li>
                 <li>
-                  <p> Zack’s new bike</p>
+                  <p> Zack’s new bike.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -142,7 +143,7 @@ export const QuizPage = () => {
               <span>Who wanted to race?</span>
               <ul>
                 <li>
-                  <p> Zack</p>
+                  <p> Zack.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -152,7 +153,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "0")}
                 </li>
                 <li>
-                  <p> Tom{" "}</p>
+                  <p> Tom.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -162,7 +163,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "1")}
                 </li>
                 <li>
-                  <p> Leo</p>
+                  <p> Leo.</p>
                   <input
                     type="radio"
                     name="q2"

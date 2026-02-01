@@ -99,11 +99,11 @@ export const QuizPage = () => {
 
           <div className="content">
             <div className="questions">
-              <div className="Q1">
+              <div className="Q1 lg:mt-[-3%]">
                 <span>Sam saw _________ from the window.</span>
                 <ul>
                   <li>
-                    <p> The mailman</p>
+                    <p> The mailman.</p>
                     <input
                       type="radio"
                       name="q1"
@@ -113,7 +113,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "0")}
                   </li>
                   <li>
-                    <p> His teacher</p>
+                    <p> His teacher.</p>
                     <input
                       type="radio"
                       name="q1"
@@ -123,7 +123,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "1")}
                   </li>
                   <li>
-                    <p> The new neighbours</p>
+                    <p> The new neighbours.</p>
                     <input
                       type="radio"
                       name="q1"
@@ -137,7 +137,8 @@ export const QuizPage = () => {
 
               {/* Question 2 */}
               <div className="Q2">
-                <span>Why didn’t Sam want to meet the new neighbours?</span>
+                <span>Why didn’t Sam want to meet the <br />
+  <span className="line-break" /> new neighbours?</span>
                 <ul>
                   <li>
                     <p> The neighbours were different.</p>

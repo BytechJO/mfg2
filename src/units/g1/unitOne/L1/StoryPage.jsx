@@ -15,14 +15,6 @@ import video3 from '../L1/assets/3.mp4';
 import video4 from '../L1/assets/4.mp4';
 import video5 from '../L1/assets/5.mp4';
 
-const videoPosters = [
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_fdv7of.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_mybqsu.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_cmsoy0.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_ln0wny.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_ntzo1k.jpg",
-];
-
 
 export const StoryPage = () => {
   const [extraBubble, setExtraBubble] = useState(null);
@@ -86,7 +78,7 @@ export const StoryPage = () => {
             { text: "how", start: 3.9, end: 4.2 },
             { text: "to", start: 4.2, end: 4.5 },
             { text: "spell", start: 4.5, end: 5.0 },
-            { text: "‘apple’", start: 5.0, end: 5.5 },
+            { text: "‘apple’.", start: 5.0, end: 5.5 },
           ]
         },
         {
@@ -97,7 +89,7 @@ export const StoryPage = () => {
             { text: "want", start: 6.7, end: 7.0 },
             { text: "to", start: 7.0, end: 7.3 },
             { text: "make", start: 7.3, end: 7.6 },
-            { text: "a mistake", start: 7.6, end: 7.9 },
+            { text: "a mistake.", start: 7.6, end: 7.9 },
           ]
         },
         {
@@ -114,7 +106,7 @@ export const StoryPage = () => {
             { text: "important", start: 14.1, end: 14.6 },
             { text: "to", start: 14.6, end: 14.8 },
             { text: "keep", start: 14.8, end: 16.5 },
-            { text: "trying", start: 14.8, end: 16.5 },
+            { text: "trying.", start: 14.8, end: 16.5 },
           ]
         },
       ]
@@ -341,20 +333,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;

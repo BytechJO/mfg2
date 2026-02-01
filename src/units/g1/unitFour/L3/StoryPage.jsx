@@ -14,19 +14,11 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import "../../shared/StoryPage.css";
 
-const video1 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802279/1_wolnr3.mp4";
-const video2 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802284/2_it0tmu.mp4";
-const video3 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802287/3_eifz9l.mp4";
-const video4 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802292/4_ghi88x.mp4";
-const video5 = "https://res.cloudinary.com/dyf5xqazg/video/upload/v1765802297/5_mzmpw0.mp4";
-
-const posters = [
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/1_wolnr3.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/2_it0tmu.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/3_eifz9l.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_1,w_640,q_auto,f_jpg/4_ghi88x.jpg",
-  "https://res.cloudinary.com/dyf5xqazg/video/upload/so_0,w_640,q_auto,f_jpg/5_mzmpw0.jpg",
-];
+import video1 from '../L3/assets/1.mp4';
+import video2 from '../L3/assets/2.mp4';
+import video3 from '../L3/assets/3.mp4';
+import video4 from '../L3/assets/4.mp4';
+import video5 from '../L3/assets/5.mp4';
 
 export const StoryPage = () => {
   const [extraBubble, setExtraBubble] = useState(null);
@@ -344,20 +336,20 @@ export const StoryPage = () => {
     setExtraBubble(bubbleToShow || null);
 
   }, [currentVideo, currentTime]);
-  useEffect(() => {
-    const nextVideoIndex = currentVideo + 1;
-    if (nextVideoIndex < videos.length) {
-      const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = nextVideoUrl;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [currentVideo, videos]);
+  // useEffect(() => {
+  //   const nextVideoIndex = currentVideo + 1;
+  //   if (nextVideoIndex < videos.length) {
+  //     const nextVideoUrl = videos[nextVideoIndex].url;
+  //     const link = document.createElement('link');
+  //     link.rel = 'preload';
+  //     link.as = 'video';
+  //     link.href = nextVideoUrl;
+  //     document.head.appendChild(link);
+  //     return () => {
+  //       document.head.removeChild(link);
+  //     };
+  //   }
+  // }, [currentVideo, videos]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
@@ -631,6 +623,10 @@ export const StoryPage = () => {
     });
   };
 
+  const isLastSubtitle =
+    activeSubtitleIndex !== -1 &&
+    activeSubtitleIndex === currentVideoData.subtitles.length - 1;
+
   return (
     <div className="story-page-container">
       {isLoading && (
@@ -684,8 +680,10 @@ export const StoryPage = () => {
           {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
             <div className="subtitle-container" style={bubbleStyle}>
 
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
-           `}>
+              <div className={`bubble-cloud animate__animated animate__fadeIn
+    ${currentVideo === 4 && isLastSubtitle ? "question-bubble" : ""}
+    ${bubbleStyle.isFlipped ? "flipped" : ""}
+  `}>
                 <p
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}

@@ -37,7 +37,7 @@ export const QuizPage = () => {
       ValidationAlert.info("Incomplete", "Please answer all questions before submitting!");
       return;
     }
-    const correctAnswers = { q1: "0", q2: "0", q3: "2" };
+    const correctAnswers = { q1: "0", q2: "1", q3: "2" };
     const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
@@ -92,21 +92,21 @@ export const QuizPage = () => {
           {/* --- بداية التعديل --- */}
           <div className="content">
             <div className="questions">
-              <div className="Q1">
+              <div className="Q1 mt-[-3%]">
                 <span>What was Henry doing?</span>
                 <ul>
                   <li>
-                    <p>  Taking a maths test</p>
+                    <p>  Taking a maths test.</p>
                     <input type="radio" name="q1" value="0" onChange={handleChange} />
                     {renderAnswerGif('q1', '0')}
                   </li>
                   <li>
-                    <p>  Drawing</p>
+                    <p>  Drawing.</p>
                     <input type="radio" name="q1" value="1" onChange={handleChange} />
                     {renderAnswerGif('q1', '1')}
                   </li>
                   <li>
-                    <p> Eating lunch</p>
+                    <p> Eating lunch.</p>
                     <input type="radio" name="q1" value="2" onChange={handleChange} />
                     {renderAnswerGif('q1', '2')}
                   </li>
@@ -115,10 +115,11 @@ export const QuizPage = () => {
 
               {/* --- Question 2 --- */}
               <div className="Q2">
-                <span>What did Henry remember if he decided to copy?</span>
+                <span>What did Henry remember if he decided<br />
+  <span className="line-break" /> to copy?</span>
                 <ul>
                   <li>
-                    <p> He will finish the test faster</p>
+                    <p> He will finish the test faster.</p>
                     <input type="radio" name="q2" value="0" onChange={handleChange} />
                     {renderAnswerGif('q2', '0')}
                   </li>

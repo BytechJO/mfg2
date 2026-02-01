@@ -94,21 +94,22 @@ export const QuizPage = () => {
           {/* --- بداية التعديل --- */}
           <div className="content">
             <div className="questions">
-              <div className="Q1">
-                <span>What was the lesson the teacher taught the girls?</span>
+              <div className="Q1 mt-[-3%]">
+                <span>What was the lesson the teacher <br />
+  <span className="line-break" />taught the girls?</span>
                 <ul>
                   <li>
-                    <p> Traffic rules</p>
+                    <p> Traffic rules.</p>
                     <input type="radio" name="q1" value="0" onChange={handleChange} />
                     {renderAnswerGif('q1', '0')}
                   </li>
                   <li>
-                    <p> Classroom rules</p>
+                    <p> Classroom rules.</p>
                     <input type="radio" name="q1" value="1" onChange={handleChange} />
                     {renderAnswerGif('q1', '1')}
                   </li>
                   <li>
-                    <p> Playground rules</p>
+                    <p> Playground rules.</p>
                     <input type="radio" name="q1" value="2" onChange={handleChange} />
                     {renderAnswerGif('q1', '2')}
                   </li>
@@ -142,17 +143,17 @@ export const QuizPage = () => {
                 <span>What is a pedestrian?</span>
                 <ul>
                   <li>
-                    <p>  A young cat</p>
+                    <p>  A young cat.</p>
                     <input type="radio" name="q3" value="0" onChange={handleChange} />
                     {renderAnswerGif('q3', '0')}
                   </li>
                   <li>
-                    <p> A person walking</p>
+                    <p> A person walking.</p>
                     <input type="radio" name="q3" value="1" onChange={handleChange} />
                     {renderAnswerGif('q3', '1')}
                   </li>
                   <li>
-                    <p> A person driving</p>
+                    <p> A person driving.</p>
                     <input type="radio" name="q3" value="2" onChange={handleChange} />
                     {renderAnswerGif('q3', '2')}
                   </li>
