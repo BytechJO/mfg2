@@ -105,7 +105,7 @@ export const StoryPage = () => {
             { text: "Mum.", start: 4.6, end: 4.8 },
             { text: "They", start: 4.8, end: 5.4 },
             { text: "look", start: 5.4, end: 6.2 },
-            { text: "different", start: 6.2, end: 7.3 },
+            { text: "different.", start: 6.2, end: 7.3 },
           ],
         },
         {
@@ -114,7 +114,7 @@ export const StoryPage = () => {
           words: [
             { text: "Everyone", start: 8, end: 8.4 },
             { text: "is", start: 8.4, end: 8.8 },
-            { text: "different,’", start: 8.8, end: 9.2 },
+            { text: "different.", start: 8.8, end: 9.2 },
 
             { text: "Being", start: 10.2, end: 10.6 },
             { text: "different", start: 10.6, end: 11.0 },
@@ -137,18 +137,18 @@ export const StoryPage = () => {
 
         },
         {
-          start: 7,
+          start: 6.5,
           end: 10.7,
           words: [
-            { text: "Mmm,", start: 7, end: 7.3 },
-            { text: "thank", start: 7.3, end: 7.5 },
-            { text: "you", start: 7.5, end: 7.9 },
-            { text: "Mrs", start: 7.9, end: 8.3 },
-            { text: "Roberts,", start: 8.3, end: 8.7 },
-            { text: "I", start: 8.7, end: 9.1 },
-            { text: "love", start: 9.1, end: 9.5 },
-            { text: "honey", start: 9.5, end: 9.9 },
-            { text: "cake,", start: 9.9, end: 10.3 },
+            { text: "Mmm,", start: 6.5, end: 8.0 },
+            { text: "thank", start: 8.0, end: 8.5 },
+            { text: "you", start: 8.5, end: 8.9 },
+            { text: "Mrs", start: 8.9, end: 9.3 },
+            { text: "Roberts,", start: 9.3, end: 9.7 },
+            { text: "I", start: 9.7, end: 10.1 },
+            { text: "love", start: 10.1, end: 10.5 },
+            { text: "honey", start: 10.5, end: 10.9 },
+            { text: "cake.", start: 10.9, end: 11.3 },
           ],
         },
         {
@@ -163,7 +163,7 @@ export const StoryPage = () => {
             { text: "young", start: 14.7, end: 15.1 },
             { text: "man", start: 15.1, end: 15.5 },
             { text: "you", start: 15.5, end: 15.9 },
-            { text: "are,", start: 15.9, end: 16.3 },
+            { text: "are.", start: 15.9, end: 16.3 },
           ],
         },
       ],
@@ -179,33 +179,33 @@ export const StoryPage = () => {
           start: 3,
           end: 8.5,
           words: [
-            { text: "‘I’m", start: 4.2, end: 4.6 },
-            { text: "Sam,", start: 4.6, end: 5.0 },
-            { text: "do", start: 5.8, end: 6 },
+            { text: "I’m", start: 4.2, end: 4.6 },
+            { text: "Sam.", start: 4.6, end: 5.0 },
+            { text: "Do", start: 5.8, end: 6 },
             { text: "you", start: 6, end: 6.2 },
             { text: "want", start: 6.2, end: 6.4 },
             { text: "to", start: 6.4, end: 6.6 },
             { text: "go", start: 6.6, end: 7.0 },
             { text: "outside", start: 7.0, end: 7.4 },
             { text: "and", start: 7.4, end: 7.8 },
-            { text: "play?’", start: 7.8, end: 8.2 },
+            { text: "play?", start: 7.8, end: 8.2 },
           ],
         },
         {
           start: 8.5,
           end: 12.6,
           words: [
-            { text: "‘My", start: 7.7, end: 8.1 },
+            { text: "My", start: 7.7, end: 8.1 },
             { text: "name", start: 8.1, end: 8.5 },
             { text: "is", start: 8.5, end: 8.9 },
-            { text: "Lee,", start: 8.9, end: 9.3 },
+            { text: "Lee.", start: 8.9, end: 9.3 },
             { text: "I", start: 9.3, end: 9.7 },
             { text: "would", start: 9.7, end: 10.1 },
             { text: "really", start: 10.1, end: 10.5 },
             { text: "like", start: 10.5, end: 10.9 },
             { text: "that.", start: 10.9, end: 11.3 },
             { text: "Let’s", start: 11.5, end: 11.9 },
-            { text: "go!’", start: 11.9, end: 12.3 },
+            { text: "go!", start: 11.9, end: 12.3 },
           ],
         },
         {
@@ -730,13 +730,17 @@ export const StoryPage = () => {
                       w.toLowerCase() === cleanWord.toLowerCase()
                     );
 
+                    const isSpecialSubtitle = activeSubtitle.start === 7.5 && activeSubtitle.end === 13.0;
+
                     return (
                       <span
                         key={index}
                         onClick={() => handleWordClick(word.text)}
                         className={`word-span 
                   ${isHighlighted && textHighlight ? 'active-word' : ''} 
-                  ${isSelected ? 'selected-word' : ''}`}
+                  ${isSelected ? 'selected-word' : ''}
+                  ${isSpecialSubtitle ? 'special-padding' : ''}
+                  `}
                       >
                         {word.text}{' '}
                       </span>
@@ -744,7 +748,7 @@ export const StoryPage = () => {
                   })}
                 </p>
 
-                
+
               </div>
             </div>
           )}

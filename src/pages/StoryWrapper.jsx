@@ -14,7 +14,7 @@ export default function StoryWrapper() {
     setIsLoading(true);
     setError(null);
     setLessonData(`Unit: ${unitId}, Lesson: ${lessonId}`);
-    
+
     const loadStoryPage = async () => {
       try {
         const module = await import(
@@ -30,41 +30,45 @@ export default function StoryWrapper() {
     };
 
     loadStoryPage();
-  }, [unitId, lessonId]); 
+  }, [unitId, lessonId]);
 
   if (isLoading) {
     return (
-      
-        <div style={{ padding: 30, textAlign: 'center' }}>
-          <p>Loading...</p>
-        </div>
-      
+
+      <div style={{ padding: 30, textAlign: 'center' }}>
+        <p>Loading...</p>
+      </div>
+
     );
   }
 
   if (error) {
     return (
-      
-        <div style={{ padding: 30, textAlign: 'center', color: 'red' }}>
-          <p>somthing happend: {error}</p>
-        </div>
-      
+
+      <div style={{ padding: 30, textAlign: 'center', color: 'red' }}>
+        <p>somthing happend: {error}</p>
+      </div>
+
     );
   }
 
   if (!storyPageComponent) {
     return (
-      
-        <div style={{ padding: 30, textAlign: 'center' }}>
-          <p>Not Found</p>
-        </div>
-      
+
+      <div style={{ padding: 30, textAlign: 'center' }}>
+        <p>Not Found</p>
+      </div>
+
     );
   }
 
   const StoryPageComponent = storyPageComponent;
 
   return (
+    <><h1 className="shine-text text-4xl sm:text-5xl font-bold text-center lg:mt-11">
+      Unit {unitId}
+    </h1>
       <StoryPageComponent unitId={unitId} lessonId={lessonId} />
+    </>
   );
 }

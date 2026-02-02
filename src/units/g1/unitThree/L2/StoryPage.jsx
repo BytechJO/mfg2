@@ -120,7 +120,7 @@ export const StoryPage = () => {
               start: 6.0,
               end: 9.4,
               words: [
-                { text: "‘We", start: 6.6, end: 9.1 },
+                { text: "We", start: 6.6, end: 9.1 },
                 { text: "shouldn’t", start: 7.0, end: 7.4 },
                 { text: "use", start: 7.4, end: 7.8 },
                 { text: "words", start: 7.8, end: 8.2 },
@@ -151,7 +151,7 @@ export const StoryPage = () => {
           start: 6.5,
           end: 10.0,
           words: [
-            { text: "‘We", start: 6.6, end: 7.0 },
+            { text: "We", start: 6.6, end: 7.0 },
             { text: "shouldn’t", start: 7.0, end: 7.4 },
             { text: "use", start: 7.4, end: 7.8 },
             { text: "words", start: 7.8, end: 8.2 },
@@ -170,7 +170,7 @@ export const StoryPage = () => {
             { text: "others", start: 11.2, end: 11.6 },
             { text: "with", start: 11.6, end: 12.0 },
             { text: "our", start: 12.0, end: 12.4 },
-            { text: "words.’", start: 12.4, end: 12.8 },
+            { text: "words.", start: 12.4, end: 12.8 },
 
             { text: "Say", start: 12.8, end: 13.2 },
             { text: "things", start: 13.2, end: 13.6 },
@@ -198,11 +198,11 @@ export const StoryPage = () => {
           start: 0,
           end: 2.4,
           words: [
-            { text: "Its", start: 0.2, end: 0.6 },
+            { text: "It’s", start: 0.2, end: 0.6 },
             { text: "okay,", start: 0.6, end: 1.0 },
             { text: "Bob.", start: 1.0, end: 1.4 },
             { text: "You", start: 1.4, end: 1.8 },
-            { text: "tried", start: 1.8, end: 2.2 },
+            { text: "tried.", start: 1.8, end: 2.2 },
           ],
         },
         {
@@ -212,11 +212,11 @@ export const StoryPage = () => {
           start: 5.1,
           end: 8.0,
           words: [
-            { text: "Its", start: 0.2, end: 0.6 },
+            { text: "It’s", start: 0.2, end: 0.6 },
             { text: "okay,", start: 0.6, end: 1.0 },
             { text: "Bob.", start: 1.0, end: 1.4 },
             { text: "You", start: 1.4, end: 1.8 },
-            { text: "tried", start: 1.8, end: 2.2 },
+            { text: "tried.", start: 1.8, end: 2.2 },
           ],
         },
       ],
@@ -273,7 +273,7 @@ export const StoryPage = () => {
       start: 0,
       end: 2.5,
       words: [
-        { text: "Sid", start: 0.7, end: 0.9 },
+        { text: "Sid", start: 0.4, end: 0.9 },
         { text: "plays", start: 0.9, end: 1.3 },
         { text: "basketball", start: 1.3, end: 1.7 },
         { text: "with", start: 1.7, end: 2.1 },
@@ -363,7 +363,7 @@ export const StoryPage = () => {
         { text: "feels", start: 8, end: 8.4 },
         { text: "angry", start: 8.4, end: 8.6 },
         { text: "with", start: 8.6, end: 8.9 },
-        { text: "Bob", start: 8.9, end: 10 },
+        { text: "Bob.", start: 8.9, end: 10 },
       ],
     },
     {
@@ -402,7 +402,7 @@ export const StoryPage = () => {
         { text: "another", start: 4.4, end: 4.8 },
         { text: "game", start: 4.8, end: 5.2 },
         { text: "of", start: 5.2, end: 5.6 },
-        { text: "basketball", start: 5.6, end: 6.0 },
+        { text: "basketball.", start: 5.6, end: 6.0 },
       ],
     },
     {
@@ -677,11 +677,11 @@ export const StoryPage = () => {
     if (!selectedText) return;
 
 
-    const allCorrectWords = ["good", "job", "bob", "you", "tried"];
+    const allCorrectWords = ["its", "okay", "bob", "you", "tried"];
 
     const wordsInSelection = selectedText
       .split(/\s+/)
-      .map(word => word.replace(/[.,?!]/g, '').toLowerCase());
+      .map(word => word.replace(/[.,?!'’]/g, "").toLowerCase());
 
     const hasWrongWords = wordsInSelection.some(word =>
       word && !allCorrectWords.includes(word)
@@ -722,7 +722,7 @@ export const StoryPage = () => {
     selection.removeAllRanges();
   };
   const handleWordClick = (word) => {
-    const cleanWord = word.toLowerCase().replace(/[.,?!]/g, "");
+    const cleanWord = word.toLowerCase().replace(/[.,?!'’]/g, "");
     const allCorrectWords = [
       "its", "okay", "bob", "you", "tried"
     ];
@@ -851,7 +851,12 @@ export const StoryPage = () => {
               className="subtitle-container"
               style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
             >
-              <div className="extra-cloud animate__animated animate__fadeIn">
+              <div
+                className={`extra-cloud animate__animated animate__fadeIn
+    ${extraBubble?.videoIndex === 1 && extraBubble?.start === 5.1 ? 'small-bubble' : ''}
+  `}
+              >
+
                 <p>
                   {extraBubble.words.map((word, index) => {
                     const isHighlighted = currentTime >= word.start && currentTime < word.end;

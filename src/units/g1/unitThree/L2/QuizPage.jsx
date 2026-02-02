@@ -40,7 +40,7 @@ export const QuizPage = () => {
       ValidationAlert.info("Incomplete", "Please answer all questions before submitting!");
       return;
     }
-    const correctAnswers = { q1: "2", q2: "0", q3: "1" };
+    const correctAnswers = { q1: "0", q2: "2", q3: "1" };
     const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
@@ -70,7 +70,7 @@ export const QuizPage = () => {
           navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
         });
     } else {
-      ValidationAlert.error("Try again", "", scoreString)
+      ValidationAlert.error("You can do it!", "", scoreString)
     }
   };
   const handleSkip = () => {
@@ -107,7 +107,7 @@ export const QuizPage = () => {
                   {renderAnswerGif('q1', '1')}
                 </li>
                 <li>
-                 <p> Sid fell downn.</p>
+                 <p> Sid fell down.</p>
                   <input type="radio" name="q1" value="2" onChange={handleChange} />
                   {renderAnswerGif('q1', '2')}
                 </li>
@@ -141,17 +141,17 @@ export const QuizPage = () => {
               <span>What did Sid say to Bob in the end?</span>
               <ul>
                 <li>
-                 <p> ‘ Don’t play with me again.’</p>
+                 <p> ‘Don’t play with me again.’</p>
                   <input type="radio" name="q3" value="0" onChange={handleChange} />
                   {renderAnswerGif('q3', '0')}
                 </li>
                 <li>
-                <p> It’s okay, Bob. You tried.’</p> 
+                <p> ‘It’s okay, Bob. You tried.’</p> 
                   <input type="radio" name="q3" value="1" onChange={handleChange} />
                   {renderAnswerGif('q3', '1')}
                 </li>
                 <li>
-                 <p> ‘ I want to go home.’</p>
+                 <p> ‘I want to go home.’</p>
                   <input type="radio" name="q3" value="2" onChange={handleChange} />
                   {renderAnswerGif('q3', '2')}
                 </li>

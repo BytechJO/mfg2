@@ -34,7 +34,7 @@
 /* زر التأكيد */
 .my-button {
   position: absolute;
-  background: #4a90e2 !important;
+  background: green !important;
   color: white !important;
   font-weight: bold !important;
   font-size: clamp(14px, 1.8vw, 18px) !important;
@@ -49,7 +49,7 @@
 }
 
 .my-button:hover {
-  background: #357abd !important;
+  background: rgb(2, 109, 2) !important;
   transform: scale(1.1);
   box-shadow: 0 clamp(5px, 1vw, 10px) clamp(8px, 1.5vw, 15px) rgba(0, 0, 0, 0.4);
 }
@@ -86,6 +86,29 @@
 
 .my-button1:hover {
   background: #d32f2f;
+  transform: scale(1.1);
+  box-shadow: 0 clamp(5px, 1vw, 10px) clamp(8px, 1.5vw, 15px) rgba(0, 0, 0, 0.4);
+}
+
+.my-button2 {
+  position: absolute;
+  background: #4a79bd;
+  color: white;
+  font-weight: bold;
+  font-size: clamp(14px, 1.8vw, 18px);
+  border-radius: 50%;
+  width: clamp(60px, 8vw, 100px);
+  height: clamp(60px, 8vw, 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(120px, 15vw, 100px);
+  transition: transform 0.3s ease, background 0.3s ease;
+  transform-origin: center;
+}
+
+.my-button2:hover {
+  background: #3c649c;
   transform: scale(1.1);
   box-shadow: 0 clamp(5px, 1vw, 10px) clamp(8px, 1.5vw, 15px) rgba(0, 0, 0, 0.4);
 }

@@ -37,7 +37,7 @@ export const QuizPage = () => {
       );
       return;
     }
-    const correctAnswers = { q1: "2", q2: "0", q3: "0" };
+    const correctAnswers = { q1: "2", q2: "0", q3: "1" };
     const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
@@ -68,7 +68,7 @@ export const QuizPage = () => {
         navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
       });
     } else {
-      ValidationAlert.error("Try again", "", scoreString);
+      ValidationAlert.error("You can do it!", "", scoreString);
     }
   };
 
@@ -95,10 +95,10 @@ export const QuizPage = () => {
           <div className="content">
             <div className="questions">
             <div className="Q1 lg:mt-[-3%]">
-              <span>Sam saw _________ from the window.</span>
+              <span>What did the boys play with?</span>
               <ul>
                 <li>
-                  <p> The mailman.</p>
+                  <p> Toy cars.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -108,7 +108,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "0")}
                 </li>
                 <li>
-                  <p>His teacher.</p>
+                  <p>A teddy.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -118,7 +118,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "1")}
                 </li>
                 <li>
-                  <p> The new neighbours.</p>
+                  <p>Toy dinosaurs.</p>
                   <input
                     type="radio"
                     name="q1"
@@ -132,11 +132,10 @@ export const QuizPage = () => {
 
             {/* Question 2 */}
             <div className="Q2">
-              <span>Why didn’t Sam want to meet the <br />
-  <span className="line-break" /> new neighbours?</span>
+              <span>What happened to the toy dinosaur?</span>
               <ul>
                 <li>
-                  <p> The neighbours were different.</p>
+                  <p>It broke.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -146,7 +145,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "0")}
                 </li>
                 <li>
-                  <p> He wanted to play video games.</p>
+                  <p>It did not break.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -156,7 +155,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "1")}
                 </li>
                 <li>
-                  <p> He wanted the cake for himself.</p>
+                  <p>It got lost.</p>
                   <input
                     type="radio"
                     name="q2"
@@ -170,10 +169,13 @@ export const QuizPage = () => {
 
             {/* Question 3 */}
             <div className="Q3">
-              <span>How did Lee seem to Sam?</span>
+              <span>What did Simon say to Jad at the end
+                <br /> <div className="line-break"> of the story?</div>
+              </span>
+              
               <ul>
                 <li>
-                  <p> He seemed nice.</p>
+                  <p> ‘ I want a dinosaur toy.’</p>
                   <input
                     type="radio"
                     name="q3"
@@ -183,7 +185,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q3", "0")}
                 </li>
                 <li>
-                  <p> He seemed mean.</p>
+                  <p>‘I am sorry.’</p>
                   <input
                     type="radio"
                     name="q3"
@@ -193,7 +195,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q3", "1")}
                 </li>
                 <li>
-                  <p> He seemed funny.</p>
+                  <p>‘I want to go home.’</p>
                   <input
                     type="radio"
                     name="q3"

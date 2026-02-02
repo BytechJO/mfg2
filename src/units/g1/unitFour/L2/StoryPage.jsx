@@ -116,7 +116,7 @@ export const StoryPage = () => {
           start: 4.0,
           end: 10.0,
           words: [
-            { text: "‘Why", start: 4.8, end: 5.1 },
+            { text: "Why", start: 4.8, end: 5.1 },
             { text: "don’t", start: 5.1, end: 5.4 },
             { text: "we", start: 5.4, end: 5.7 },
             { text: "make", start: 5.7, end: 6.0 },
@@ -130,7 +130,7 @@ export const StoryPage = () => {
             { text: "Sonia", start: 8.1, end: 8.4 },
             { text: "at", start: 8.4, end: 8.7 },
             { text: "school", start: 8.7, end: 9.0 },
-            { text: "tomorrow?’", start: 9.0, end: 9.3 },
+            { text: "tomorrow?", start: 9.0, end: 9.3 },
           ],
         },
       ],

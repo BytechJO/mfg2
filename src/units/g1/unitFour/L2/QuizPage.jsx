@@ -38,7 +38,7 @@ export const QuizPage = () => {
       );
       return;
     }
-    const correctAnswers = { q1: "2", q2: "2", q3: "1" };
+    const correctAnswers = { q1: "0", q2: "2", q3: "1" };
     const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
@@ -68,7 +68,7 @@ export const QuizPage = () => {
         navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
       });
     } else {
-      ValidationAlert.error("Try again", "", scoreString);
+      ValidationAlert.error("You can do it!", "", scoreString);
     }
   };
 
@@ -98,7 +98,7 @@ export const QuizPage = () => {
                 <span>Mum wanted to bake cookies for ________.</span>
                 <ul>
                   <li>
-                    <p>Her friend. </p>
+                    <p>her friend. </p>
                     <input
                       type="radio"
                       name="q1"
@@ -109,7 +109,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "0")}
                   </li>
                   <li>
-                    <p>The neighbour. </p>
+                    <p>the neighbour. </p>
                     <input
                       type="radio"
                       name="q1"
