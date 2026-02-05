@@ -123,7 +123,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "1")}
                   </li>
                   <li>
-                    <p> The new neighbours</p>
+                    <p> the new neighbours</p>
                     <input
                       type="radio"
                       name="q1"
