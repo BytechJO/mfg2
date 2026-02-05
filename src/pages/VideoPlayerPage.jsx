@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 // --- 1. استيراد AnimatePresence و Menu ---
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, PlayCircle, Menu } from "lucide-react"; // تم إزالة ChevronLeft/Right لأنها غير مستخدمة هنا

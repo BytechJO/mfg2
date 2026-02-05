@@ -121,7 +121,7 @@
 
 .active-word {
   color: #db2777;
-  font-weight: bold;
+  text-shadow: -0.06ex 0 currentColor, 0.06ex 0 currentColor;
 }
 
 .selected-word {
@@ -713,7 +713,6 @@ html {
 .feedquiz {
   background: transparent;
   border: none;
-  cursor: pointer;
   padding: 8px;
   border-radius: 50%;
   display: flex;
@@ -1100,7 +1099,6 @@ html {
   align-items: center;
   justify-content: center;
   color: white;
-  cursor: pointer;
   transition: all 0.3s ease;
   pointer-events: auto;
   z-index: 100000000;

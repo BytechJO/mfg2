@@ -93,7 +93,7 @@ export const QuizPage = () => {
 
           <div className="content">
             <div className="questions">
-            <div className="Q1">
+            <div className="Q1 lg:mt-[-2%]">
               <span>Why was Sid angry?</span>
               <ul>
                 <li>

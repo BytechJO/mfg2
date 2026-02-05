@@ -790,7 +790,7 @@ body {
 .Q3 li::before
   {
   content: counter(answer, lower-alpha);
-  color: #c598c6;
+  color: #e2a02d;
   margin-right: 8px;
 }
 
@@ -806,7 +806,7 @@ body {
 .questions > div > span::before {
   content: counter(question) ;
   margin-right: 6px;
-  background: #c598c6;
+  background: #e2a02d;
   border-radius: 60%;
   color: #fff;
   padding: 2px 7px 3px 6px; 

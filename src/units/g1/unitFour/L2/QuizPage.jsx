@@ -94,7 +94,7 @@ export const QuizPage = () => {
 
           <div className="content quizfix">
             <div className="questions">
-              <div className="Q1 lg:mt-[-2.5%]">
+              <div className="Q1 lg:mt-[-3%]">
                 <span>Mum wanted to bake cookies for ________.</span>
                 <ul>
                   <li>

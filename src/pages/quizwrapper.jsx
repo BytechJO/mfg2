@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, PlayCircle, ChevronLeft, ChevronRight, Menu } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
@@ -6,24 +6,40 @@ import { AnimatedCharacter } from "./AnimatedCharacter";
 import { useParams, useNavigate } from "react-router-dom";
 import logo from "../assets/PreissMurphy Logo-BGSDEhSA (1).svg";
 
-// ... (كود استيراد الصفحات والدروس يبقى كما هو)
+import QuizPageOne1 from "../units/g1/unitOne/L1/QuizPage.jsx";
+import QuizPageOne2 from "../units/g1/unitOne/L2/QuizPage.jsx";
+import QuizPageOne3 from "../units/g1/unitOne/L3/QuizPage.jsx";
+
+import QuizPageTwo1 from "../units/g1/unitTwo/L1/QuizPage.jsx";
+import QuizPageTwo2 from "../units/g1/unitTwo/L2/QuizPage.jsx";
+import QuizPageTwo3 from "../units/g1/unitTwo/L3/QuizPage.jsx";
+
+import QuizPageThree1 from "../units/g1/unitThree/L1/QuizPage.jsx";
+import QuizPageThree2 from "../units/g1/unitThree/L2/QuizPage.jsx";
+import QuizPageThree3 from "../units/g1/unitThree/L3/QuizPage.jsx";
+
+import QuizPageFour1 from "../units/g1/unitFour/L1/QuizPage.jsx";
+import QuizPageFour2 from "../units/g1/unitFour/L2/QuizPage.jsx";
+import QuizPageFour3 from "../units/g1/unitFour/L3/QuizPage.jsx";
+
 const pages = {
-  "One-1": lazy(() => import("../units/g1/unitOne/L1/QuizPage.jsx")),
-  "One-2": lazy(() => import("../units/g1/unitOne/L2/QuizPage.jsx")),
-  "One-3": lazy(() => import("../units/g1/unitOne/L3/QuizPage.jsx")),
+  "One-1": QuizPageOne1,
+  "One-2": QuizPageOne2,
+  "One-3": QuizPageOne3,
 
-  "Two-1": lazy(() => import("../units/g1/unitTwo/L1/QuizPage.jsx")),
-  "Two-2": lazy(() => import("../units/g1/unitTwo/L2/QuizPage.jsx")),
-  "Two-3": lazy(() => import("../units/g1/unitTwo/L3/QuizPage.jsx")),
+  "Two-1": QuizPageTwo1,
+  "Two-2": QuizPageTwo2,
+  "Two-3": QuizPageTwo3,
 
-  "Three-1": lazy(() => import("../units/g1/unitThree/L1/QuizPage.jsx")),
-  "Three-2": lazy(() => import("../units/g1/unitThree/L2/QuizPage.jsx")),
-  "Three-3": lazy(() => import("../units/g1/unitThree/L3/QuizPage.jsx")),
+  "Three-1": QuizPageThree1,
+  "Three-2": QuizPageThree2,
+  "Three-3": QuizPageThree3,
 
-  "Four-1": lazy(() => import("../units/g1/unitFour/L1/QuizPage.jsx")),
-  "Four-2": lazy(() => import("../units/g1/unitFour/L2/QuizPage.jsx")),
-  "Four-3": lazy(() => import("../units/g1/unitFour/L3/QuizPage.jsx")),
+  "Four-1": QuizPageFour1,
+  "Four-2": QuizPageFour2,
+  "Four-3": QuizPageFour3,
 };
+
 
 const lessons = [
   { number: 1, color: "from-blue-400 to-blue-500" },
@@ -73,15 +89,18 @@ export default function VideoPlayerPage() {
             transition={{ delay: 0.3 }}
             className="w-full h-full"
           >
-            <Suspense fallback={<div>Loading...</div>}>
-              <h1 className="shine-text text-4xl sm:text-5xl font-bold text-center lg:mt-10">
-                Unit {unitId}
-              </h1>
-              <Component />
-            </Suspense>
+            <h1 className="shine-text text-4xl sm:text-5xl font-bold text-center lg:mt-20">
+              Unit {unitId}
+            </h1>
+            <Component />
           </motion.div>
         </div>
-        <button onClick={handleSkip} className="feedquiz right">
+        {/* onClick={handleSkip} */}
+        <button  
+        disabled
+        className="feedquiz right cursor-not-allowed opacity-50"
+        title="You should solve and check the answers first"
+        >
           <ChevronRight className="w-8 h-8 z-[10000]" />
         </button>
       </div>
@@ -147,8 +166,7 @@ export default function VideoPlayerPage() {
                relative z-50 right-40
                p-2 rounded-md border
                border-[#b99cfa] text-[#6B40C8]
-               hover:bg-purple-50
-             "
+               hover:bg-purple-50"
               >
                 <Menu className="w-5 h-5" />
               </button>
@@ -176,8 +194,8 @@ export default function VideoPlayerPage() {
                         key={l.number}
                         onClick={() => handleLessonSelect(l.number)}
                         className={`w-full text-left px-3 py-2 rounded-md text-sm flex items-center gap-3 transition-colors ${Number(lessonId) === l.number
-                            ? `font-bold text-white bg-gradient-to-r ${l.color}`
-                            : "text-gray-700 hover:bg-gray-100"
+                          ? `font-bold text-white bg-gradient-to-r ${l.color}`
+                          : "text-gray-700 hover:bg-gray-100"
                           }`}
                       >
                         <PlayCircle className="w-5 h-5" />

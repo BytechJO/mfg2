@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 // --- 1. استيراد AnimatePresence و Menu ---
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, PlayCircle, ChevronLeft, Menu } from "lucide-react"; // تم تعديل الاستيرادات
@@ -7,23 +7,40 @@ import { AnimatedCharacter } from "./AnimatedCharacter";
 import { useParams, useNavigate } from "react-router-dom";
 import logo from "../assets/PreissMurphy Logo-BGSDEhSA (1).svg";
 
+import FeedBackOne1 from "../units/g1/unitOne/L1/feedBack.jsx";
+import FeedBackOne2 from "../units/g1/unitOne/L2/feedBack.jsx";
+import FeedBackOne3 from "../units/g1/unitOne/L3/feedBack.jsx";
+
+import FeedBackTwo1 from "../units/g1/unitTwo/L1/feedBack.jsx";
+import FeedBackTwo2 from "../units/g1/unitTwo/L2/feedBack.jsx";
+import FeedBackTwo3 from "../units/g1/unitTwo/L3/feedBack.jsx";
+
+import FeedBackThree1 from "../units/g1/unitThree/L1/feedBack.jsx";
+import FeedBackThree2 from "../units/g1/unitThree/L2/feedBack.jsx";
+import FeedBackThree3 from "../units/g1/unitThree/L3/feedBack.jsx";
+
+import FeedBackFour1 from "../units/g1/unitFour/L1/feedBack.jsx";
+import FeedBackFour2 from "../units/g1/unitFour/L2/feedBack.jsx";
+import FeedBackFour3 from "../units/g1/unitFour/L3/feedBack.jsx";
+
 const pages = {
-  "One-1": lazy(() => import("../units/g1/unitOne/L1/feedBack.jsx")),
-  "One-2": lazy(() => import("../units/g1/unitOne/L2/feedBack.jsx")),
-  "One-3": lazy(() => import("../units/g1/unitOne/L3/feedBack.jsx")),
+  "One-1": FeedBackOne1,
+  "One-2": FeedBackOne2,
+  "One-3": FeedBackOne3,
 
-  "Two-1": lazy(() => import("../units/g1/unitTwo/L1/feedBack.jsx")),
-  "Two-2": lazy(() => import("../units/g1/unitTwo/L2/feedBack.jsx")),
-  "Two-3": lazy(() => import("../units/g1/unitTwo/L3/feedBack.jsx")),
+  "Two-1": FeedBackTwo1,
+  "Two-2": FeedBackTwo2,
+  "Two-3": FeedBackTwo3,
 
-  "Three-1": lazy(() => import("../units/g1/unitThree/L1/feedBack.jsx")),
-  "Three-2": lazy(() => import("../units/g1/unitThree/L2/feedBack.jsx")),
-  "Three-3": lazy(() => import("../units/g1/unitThree/L3/feedBack.jsx")),
+  "Three-1": FeedBackThree1,
+  "Three-2": FeedBackThree2,
+  "Three-3": FeedBackThree3,
 
-  "Four-1": lazy(() => import("../units/g1/unitFour/L1/feedBack.jsx")),
-  "Four-2": lazy(() => import("../units/g1/unitFour/L2/feedBack.jsx")),
-  "Four-3": lazy(() => import("../units/g1/unitFour/L3/feedBack.jsx")),
+  "Four-1": FeedBackFour1,
+  "Four-2": FeedBackFour2,
+  "Four-3": FeedBackFour3,
 };
+
 
 const lessons = [
   { number: 1, color: "from-blue-400 to-blue-500" },
@@ -52,7 +69,7 @@ const FeedbackWrapper = () => {
   };
 
   const handlePrevious = () => {
-    navigate(-2);
+    navigate(-1);
   };
 
   if (!Component) return <div>feedback not found</div>;
@@ -73,12 +90,10 @@ const FeedbackWrapper = () => {
             transition={{ delay: 0.3 }}
             className="w-full h-full"
           >
-            <Suspense fallback={<div>Loading...</div>}>
               <h1 className="shine-text text-4xl sm:text-5xl font-bold text-center lg:mb-7">
                 Unit {unitId}
               </h1>
               <Component />
-            </Suspense>
           </motion.div>
         </div>
       </div>
