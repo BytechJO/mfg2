@@ -238,10 +238,10 @@ export const StoryPage = () => {
       start: 8,
       end: 10,
       words: [
-        { text: "Jade", start: 7.9, end: 8.3 },
-        { text: "thinks", start: 8.3, end: 8.7 },
-        { text: "and", start: 8.7, end: 9.1 },
-        { text: "thinks.", start: 9.1, end: 9.5 },
+        { text: "Jade", start: 8.5, end: 8.9 },
+        { text: "thinks", start: 8.9, end: 9.3 },
+        { text: "and", start: 9.3, end: 9.7 },
+        { text: "thinks.", start: 9.7, end: 10.0 },
       ],
     },
     {
@@ -281,12 +281,12 @@ export const StoryPage = () => {
     },
     {
       videoIndex: 4,
-      start: 9.2,
-      end: 10.0,
+      start: 9.7,
+      end: 12.0,
       words: [
-        { text: "Ella", start: 9.3, end: 9.5 },
-        { text: "thanks", start: 9.5, end: 9.7 },
-        { text: "Jade.", start: 9.7, end: 10.0 },
+        { text: "Ella", start: 10.0, end: 10.5 },
+        { text: "thanks", start: 10.5, end: 11.0 },
+        { text: "Jade.", start: 11.0, end: 11.5 },
       ],
     },
 

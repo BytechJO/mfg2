@@ -82,14 +82,12 @@ export const StoryPage = () => {
           ]
         },
         {
-          start: 6.0, end: 8.0,
+          start: 6.5, end: 8.4,
           words: [
-            { text: "I", start: 6.1, end: 6.4 },
-            { text: "don’t", start: 6.4, end: 6.7 },
-            { text: "want", start: 6.7, end: 7.0 },
-            { text: "to", start: 7.0, end: 7.3 },
-            { text: "make", start: 7.3, end: 7.6 },
-            { text: "a mistake.", start: 7.6, end: 7.9 },
+            { text: "I don’t", start: 7.0, end: 7.3 },
+            { text: "want", start: 7.3, end: 7.5 },
+            { text: "to make", start: 7.5, end: 7.8 },
+            { text: "a mistake.", start: 7.8, end: 8.1 },
           ]
         },
         {
@@ -104,9 +102,9 @@ export const StoryPage = () => {
             { text: "it", start: 13.5, end: 13.8 },
             { text: "is", start: 13.8, end: 14.1 },
             { text: "important", start: 14.1, end: 14.6 },
-            { text: "to", start: 14.6, end: 14.8 },
-            { text: "keep", start: 14.8, end: 16.5 },
-            { text: "trying.", start: 14.8, end: 16.5 },
+            { text: "to", start: 14.6, end: 15.4 },
+            { text: "keep", start: 14.6, end: 15.4 },
+            { text: "trying.", start: 15.4, end: 16.5 },
           ]
         },
       ]

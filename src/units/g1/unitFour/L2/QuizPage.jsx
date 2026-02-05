@@ -98,7 +98,7 @@ export const QuizPage = () => {
                 <span>Mum wanted to bake cookies for ________.</span>
                 <ul>
                   <li>
-                    <p>her friend. </p>
+                    <p>her friend </p>
                     <input
                       type="radio"
                       name="q1"
@@ -109,7 +109,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "0")}
                   </li>
                   <li>
-                    <p>the neighbour. </p>
+                    <p>the neighbour </p>
                     <input
                       type="radio"
                       name="q1"
@@ -120,7 +120,7 @@ export const QuizPage = () => {
                     {renderAnswerGif("q1", "1")}
                   </li>
                   <li>
-                    <p> Claire.</p>
+                    <p> Claire</p>
                     <input
                       type="radio"
                       name="q1"
