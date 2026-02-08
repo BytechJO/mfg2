@@ -212,7 +212,7 @@ export const StoryPage = () => {
           start: 5.1,
           end: 8.0,
           words: [
-            { text: "It's", start: 0.2, end: 0.6 },
+            { text: "It’s", start: 0.2, end: 0.6 },
             { text: "okay,", start: 0.6, end: 1.0 },
             { text: "Bob.", start: 1.0, end: 1.4 },
             { text: "You", start: 1.4, end: 1.8 },
@@ -430,6 +430,11 @@ export const StoryPage = () => {
   const settingsPopupRef = useRef(null);
   const [narrationHighlight, setNarrationHighlight] = useState(true);
   const currentVideoData = videos[currentVideo];
+
+  const normalize = (w) =>
+  w
+    .toLowerCase()
+    .replace(/[^\w]/g, ""); // يحذف كل الرموز مرة واحدة
 
 
   useEffect(() => {
@@ -667,8 +672,7 @@ export const StoryPage = () => {
       }
     }
   }, [currentVideo, videos.length, navigate, unitId, lessonId, autoPlayNext]);
-
-
+  
   const handleTextSelection = () => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) return;
@@ -681,7 +685,7 @@ export const StoryPage = () => {
 
     const wordsInSelection = selectedText
       .split(/\s+/)
-      .map(word => word.replace(/[.,?!']/g, "").toLowerCase());
+      .map(word => normalize(word));
 
     const hasWrongWords = wordsInSelection.some(word =>
       word && !allCorrectWords.includes(word)
@@ -722,7 +726,7 @@ export const StoryPage = () => {
     selection.removeAllRanges();
   };
   const handleWordClick = (word) => {
-    const cleanWord = word.trim().toLowerCase().replace(/[.,?!']/g, "");
+    const cleanWord = normalize(word);
     const allCorrectWords = [
       "its", "okay", "bob", "you", "tried"
     ];
@@ -822,7 +826,7 @@ export const StoryPage = () => {
                 >
                   {activeSubtitle.words.map((word, index) => {
                     const isHighlighted = currentTime >= word.start && currentTime < word.end;
-                    const cleanWord = word.text.replace(/[.,?!]/g, '');
+                    const cleanWord = normalize(word.text);
                     const isSelected = selectedWords.some(w =>
                       w.toLowerCase() === cleanWord.toLowerCase()
                     );
