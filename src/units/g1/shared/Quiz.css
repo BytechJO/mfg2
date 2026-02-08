@@ -816,3 +816,28 @@ body {
   display: inline-block;
   margin-left: 3%;
 }
+
+
+@media (min-width: 834px) and (max-width: 1194px) {
+  #p3 li input[type="radio"] {
+    left: 46%;
+  }
+}
+
+@media (width: 768px) and (height: 1024px) {
+   #p3 li input[type="radio"] {
+    left: 46%;
+  }
+}
+
+@media (width: 540px) and (orientation: portrait) {
+  #p3 li input[type="radio"] {
+    left: 56%;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 340px) and (max-width: 460px) {
+  #p3 li input[type="radio"] {
+    left: 76%;
+  }
+}
