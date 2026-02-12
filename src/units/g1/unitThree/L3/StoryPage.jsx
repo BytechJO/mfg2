@@ -498,13 +498,16 @@ export const StoryPage = () => {
     setShowBanner(false);
   };
   const handleNext = () => {
-    if (currentVideo === videos.length - 1) {
+  if (currentVideo === videos.length - 1) {
+    // الانتقال بعد تأخير
+    setTimeout(() => {
       navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-    } else {
-      setCurrentVideo(prev => prev + 1);
-      setShowBanner(false);
-    }
-  };
+    }, 500); // تأخير نصف ثانية
+  } else {
+    setCurrentVideo((prev) => prev + 1);
+    setShowBanner(false);
+  }
+};
   const togglePlay = () => {
     if (selectedWords.length === 1) {
       handleNext();

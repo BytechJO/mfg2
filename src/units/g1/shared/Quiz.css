@@ -796,11 +796,13 @@ body {
 
 .questions {
   counter-reset: question 0; 
+  z-index: 900000000000 !important;
 }
 
 .questions > div > span {
   counter-increment: question; 
   font-weight: bold;
+  z-index: 900000000000 !important;
 }
 
 .questions > div > span::before {
@@ -810,6 +812,7 @@ body {
   border-radius: 60%;
   color: #fff;
   padding: 2px 7px 3px 6px; 
+  z-index: 900000000000 !important;
 }
 
 .line-break {
